@@ -1,0 +1,65 @@
+edition = "2023";
+
+package getting_married;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/go_features.proto";
+
+option features.(pb.go).api_level = API_OPAQUE;
+// Compile: protoc -I=proto --go_out=proto_out proto/*
+option go_package = "github.com/sbarfurth/getting-married/partypb";
+
+message RSVP {
+  enum Response {
+    UNSPECIFIED = 0;
+    ACCEPTED = 1;
+    DECLINED = 2;
+  }
+  Response response = 3;
+
+  string dietary_restrictions = 4;
+
+  string music_wishes = 5;
+
+  string note = 6;
+
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message Guest {
+  string first_name = 1;
+
+  string last_name = 2;
+
+  RSVP rsvp = 3;
+}
+
+// Party of guests that are invited to the wedding. Contact information is
+// always managed at the Party rather than the guest level.
+message Party {
+  string name = 1;
+
+  string display_name = 2;
+
+  Guest manager = 3;
+
+  repeated Guest guests = 4;
+
+  // Maximum number of guests in this party, not including the party manager.
+  int32 max_guests = 5;
+
+  message Address {
+    string street = 1;
+    string postal_code = 2;
+    string city = 3;
+  }
+  Address address = 6;
+
+  message Contact {
+    string email = 1;
+    string phone = 2;
+  }
+  Contact contact = 7;
+
+  google.protobuf.Timestamp updated_at = 8;
+}

@@ -1,0 +1,47 @@
+edition = "2023";
+
+package getting_married;
+
+import "party.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/sbarfurth/getting-married/partypb";
+
+service PartyService {
+  rpc GetParty(GetPartyRequest) returns (Party) {}
+
+  rpc ListParties(ListPartiesRequest) returns (ListPartiesResponse) {}
+
+  rpc CreateParty(CreatePartyRequest) returns (Party) {}
+
+  rpc UpdateParty(UpdatePartyRequest) returns (Party) {}
+
+  rpc DeleteParty(DeletePartyRequest) returns (google.protobuf.Empty) {}
+}
+
+message GetPartyRequest {
+  // The name of the party to retrieve.
+  string name = 1;
+}
+
+message ListPartiesRequest {}
+
+message ListPartiesResponse {
+  // The parties.
+  repeated Party parties = 1;
+}
+
+message CreatePartyRequest {
+  // The party to create. The name field will be ignored/overwritten.
+  Party party = 1;
+}
+
+message UpdatePartyRequest {
+  // The party to update.
+  Party party = 1;
+}
+
+message DeletePartyRequest {
+  // The name of the party to delete.
+  string name = 1;
+}
