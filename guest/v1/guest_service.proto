@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package guest.v1;
+
+import "guest/v1/guest.proto";
+
+option go_package = "getting-married/gen/guest/v1;guestv1";
+
+service GuestService {
+  rpc GetParty(GetPartyRequest) returns (GetPartyResponse) {}
+  rpc CreateParty(CreatePartyRequest) returns (CreatePartyResponse) {}
+}
+
+message GetPartyRequest {
+  string name = 1;
+}
+
+message GetPartyResponse {
+  Party party = 1;
+}
+
+message CreatePartyRequest {
+  Party party = 1;
+}
+
+message CreatePartyResponse {
+  Party party = 1;
+}

@@ -1,19 +1,16 @@
-edition = "2023";
+syntax = "proto3";
 
-package getting_married;
+package guest.v1;
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/go_features.proto";
 
-option features.(pb.go).api_level = API_OPAQUE;
-// Compile: protoc -I=proto --go_out=proto_out proto/*
-option go_package = "github.com/sbarfurth/getting-married/partypb";
+option go_package = "getting-married/gen/guest/v1;guestv1";
 
 message RSVP {
   enum Response {
-    UNSPECIFIED = 0;
-    ACCEPTED = 1;
-    DECLINED = 2;
+    RESPONSE_UNSPECIFIED = 0;
+    RESPONSE_ACCEPTED = 1;
+    RESPONSE_DECLINED = 2;
   }
   Response response = 3;
 
@@ -27,11 +24,13 @@ message RSVP {
 }
 
 message Guest {
-  string first_name = 1;
+  string name = 1;
 
-  string last_name = 2;
+  string first_name = 2;
 
-  RSVP rsvp = 3;
+  string last_name = 3;
+
+  RSVP rsvp = 4;
 }
 
 // Party of guests that are invited to the wedding. Contact information is
