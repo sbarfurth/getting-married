@@ -37,7 +37,7 @@ func (s *Server) GetParty(ctx context.Context, req *connect.Request[guestv1.GetP
 	var partyBytes []byte
 	if err := s.boltDB.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket(bucketName)
-		copy(partyBytes, b.Get([]byte(req.Msg.GetName())))
+		partyBytes = b.Get([]byte(req.Msg.GetName()))
 		return nil
 	}); err != nil {
 		return nil, connect.NewError(connect.CodeInternal, err)
@@ -71,10 +71,9 @@ func (s *Server) CreateParty(ctx context.Context, req *connect.Request[guestv1.C
 		return nil, connect.NewError(connect.CodeUnknown, err)
 	}
 
-	if err := s.boltDB.View(func(tx *bolt.Tx) error {
+	if err := s.boltDB.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket(bucketName)
-		b.Put([]byte(party.GetName()), partyBytes)
-		return nil
+		return b.Put([]byte(party.GetName()), partyBytes)
 	}); err != nil {
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
