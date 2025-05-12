@@ -24,8 +24,6 @@ message RSVP {
 }
 
 message Guest {
-  string name = 1;
-
   string first_name = 2;
 
   string last_name = 3;
@@ -40,25 +38,23 @@ message Party {
 
   string display_name = 2;
 
-  Guest manager = 3;
+  repeated Guest guests = 3;
 
-  repeated Guest guests = 4;
-
-  // Maximum number of guests in this party, not including the party manager.
-  int32 max_guests = 5;
+  // Maximum number of guests in this party.
+  int32 max_guests = 4;
 
   message Address {
     string street = 1;
     string postal_code = 2;
     string city = 3;
   }
-  Address address = 6;
+  Address address = 5;
 
   message Contact {
     string email = 1;
     string phone = 2;
   }
-  Contact contact = 7;
+  Contact contact = 6;
 
-  google.protobuf.Timestamp updated_at = 8;
+  google.protobuf.Timestamp updated_at = 7;
 }

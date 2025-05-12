@@ -9,6 +9,7 @@ package guestv1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -109,6 +110,190 @@ func (x *GetPartyResponse) GetParty() *Party {
 	return nil
 }
 
+type UpdatePartyContactInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Address       *Party_Address         `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	Contact       *Party_Contact         `protobuf:"bytes,3,opt,name=contact,proto3" json:"contact,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePartyContactInfoRequest) Reset() {
+	*x = UpdatePartyContactInfoRequest{}
+	mi := &file_guest_v1_guest_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePartyContactInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePartyContactInfoRequest) ProtoMessage() {}
+
+func (x *UpdatePartyContactInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_guest_v1_guest_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePartyContactInfoRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePartyContactInfoRequest) Descriptor() ([]byte, []int) {
+	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UpdatePartyContactInfoRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdatePartyContactInfoRequest) GetAddress() *Party_Address {
+	if x != nil {
+		return x.Address
+	}
+	return nil
+}
+
+func (x *UpdatePartyContactInfoRequest) GetContact() *Party_Contact {
+	if x != nil {
+		return x.Contact
+	}
+	return nil
+}
+
+type UpdatePartyContactInfoResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Party         *Party                 `protobuf:"bytes,1,opt,name=party,proto3" json:"party,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePartyContactInfoResponse) Reset() {
+	*x = UpdatePartyContactInfoResponse{}
+	mi := &file_guest_v1_guest_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePartyContactInfoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePartyContactInfoResponse) ProtoMessage() {}
+
+func (x *UpdatePartyContactInfoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_guest_v1_guest_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePartyContactInfoResponse.ProtoReflect.Descriptor instead.
+func (*UpdatePartyContactInfoResponse) Descriptor() ([]byte, []int) {
+	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *UpdatePartyContactInfoResponse) GetParty() *Party {
+	if x != nil {
+		return x.Party
+	}
+	return nil
+}
+
+type ListPartiesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPartiesRequest) Reset() {
+	*x = ListPartiesRequest{}
+	mi := &file_guest_v1_guest_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPartiesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPartiesRequest) ProtoMessage() {}
+
+func (x *ListPartiesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_guest_v1_guest_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPartiesRequest.ProtoReflect.Descriptor instead.
+func (*ListPartiesRequest) Descriptor() ([]byte, []int) {
+	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{4}
+}
+
+type ListPartiesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Parties       []*Party               `protobuf:"bytes,1,rep,name=parties,proto3" json:"parties,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPartiesResponse) Reset() {
+	*x = ListPartiesResponse{}
+	mi := &file_guest_v1_guest_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPartiesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPartiesResponse) ProtoMessage() {}
+
+func (x *ListPartiesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_guest_v1_guest_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPartiesResponse.ProtoReflect.Descriptor instead.
+func (*ListPartiesResponse) Descriptor() ([]byte, []int) {
+	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListPartiesResponse) GetParties() []*Party {
+	if x != nil {
+		return x.Parties
+	}
+	return nil
+}
+
 type CreatePartyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Party         *Party                 `protobuf:"bytes,1,opt,name=party,proto3" json:"party,omitempty"`
@@ -118,7 +303,7 @@ type CreatePartyRequest struct {
 
 func (x *CreatePartyRequest) Reset() {
 	*x = CreatePartyRequest{}
-	mi := &file_guest_v1_guest_service_proto_msgTypes[2]
+	mi := &file_guest_v1_guest_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -130,7 +315,7 @@ func (x *CreatePartyRequest) String() string {
 func (*CreatePartyRequest) ProtoMessage() {}
 
 func (x *CreatePartyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_guest_v1_guest_service_proto_msgTypes[2]
+	mi := &file_guest_v1_guest_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -143,7 +328,7 @@ func (x *CreatePartyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePartyRequest.ProtoReflect.Descriptor instead.
 func (*CreatePartyRequest) Descriptor() ([]byte, []int) {
-	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{2}
+	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreatePartyRequest) GetParty() *Party {
@@ -162,7 +347,7 @@ type CreatePartyResponse struct {
 
 func (x *CreatePartyResponse) Reset() {
 	*x = CreatePartyResponse{}
-	mi := &file_guest_v1_guest_service_proto_msgTypes[3]
+	mi := &file_guest_v1_guest_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -174,7 +359,7 @@ func (x *CreatePartyResponse) String() string {
 func (*CreatePartyResponse) ProtoMessage() {}
 
 func (x *CreatePartyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_guest_v1_guest_service_proto_msgTypes[3]
+	mi := &file_guest_v1_guest_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -187,7 +372,7 @@ func (x *CreatePartyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePartyResponse.ProtoReflect.Descriptor instead.
 func (*CreatePartyResponse) Descriptor() ([]byte, []int) {
-	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{3}
+	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CreatePartyResponse) GetParty() *Party {
@@ -197,22 +382,173 @@ func (x *CreatePartyResponse) GetParty() *Party {
 	return nil
 }
 
+type UpdatePartyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Party         *Party                 `protobuf:"bytes,1,opt,name=party,proto3" json:"party,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePartyRequest) Reset() {
+	*x = UpdatePartyRequest{}
+	mi := &file_guest_v1_guest_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePartyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePartyRequest) ProtoMessage() {}
+
+func (x *UpdatePartyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_guest_v1_guest_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePartyRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePartyRequest) Descriptor() ([]byte, []int) {
+	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *UpdatePartyRequest) GetParty() *Party {
+	if x != nil {
+		return x.Party
+	}
+	return nil
+}
+
+type UpdatePartyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Party         *Party                 `protobuf:"bytes,1,opt,name=party,proto3" json:"party,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePartyResponse) Reset() {
+	*x = UpdatePartyResponse{}
+	mi := &file_guest_v1_guest_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePartyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePartyResponse) ProtoMessage() {}
+
+func (x *UpdatePartyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_guest_v1_guest_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePartyResponse.ProtoReflect.Descriptor instead.
+func (*UpdatePartyResponse) Descriptor() ([]byte, []int) {
+	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UpdatePartyResponse) GetParty() *Party {
+	if x != nil {
+		return x.Party
+	}
+	return nil
+}
+
+type DeletePartyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeletePartyRequest) Reset() {
+	*x = DeletePartyRequest{}
+	mi := &file_guest_v1_guest_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeletePartyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePartyRequest) ProtoMessage() {}
+
+func (x *DeletePartyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_guest_v1_guest_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePartyRequest.ProtoReflect.Descriptor instead.
+func (*DeletePartyRequest) Descriptor() ([]byte, []int) {
+	return file_guest_v1_guest_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DeletePartyRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 var File_guest_v1_guest_service_proto protoreflect.FileDescriptor
 
 const file_guest_v1_guest_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1cguest/v1/guest_service.proto\x12\bguest.v1\x1a\x14guest/v1/guest.proto\"%\n" +
+	"\x1cguest/v1/guest_service.proto\x12\bguest.v1\x1a\x14guest/v1/guest.proto\x1a\x1bgoogle/protobuf/empty.proto\"%\n" +
 	"\x0fGetPartyRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"9\n" +
 	"\x10GetPartyResponse\x12%\n" +
-	"\x05party\x18\x01 \x01(\v2\x0f.guest.v1.PartyR\x05party\";\n" +
+	"\x05party\x18\x01 \x01(\v2\x0f.guest.v1.PartyR\x05party\"\x99\x01\n" +
+	"\x1dUpdatePartyContactInfoRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x121\n" +
+	"\aaddress\x18\x02 \x01(\v2\x17.guest.v1.Party.AddressR\aaddress\x121\n" +
+	"\acontact\x18\x03 \x01(\v2\x17.guest.v1.Party.ContactR\acontact\"G\n" +
+	"\x1eUpdatePartyContactInfoResponse\x12%\n" +
+	"\x05party\x18\x01 \x01(\v2\x0f.guest.v1.PartyR\x05party\"\x14\n" +
+	"\x12ListPartiesRequest\"@\n" +
+	"\x13ListPartiesResponse\x12)\n" +
+	"\aparties\x18\x01 \x03(\v2\x0f.guest.v1.PartyR\aparties\";\n" +
 	"\x12CreatePartyRequest\x12%\n" +
 	"\x05party\x18\x01 \x01(\v2\x0f.guest.v1.PartyR\x05party\"<\n" +
 	"\x13CreatePartyResponse\x12%\n" +
-	"\x05party\x18\x01 \x01(\v2\x0f.guest.v1.PartyR\x05party2\xa1\x01\n" +
+	"\x05party\x18\x01 \x01(\v2\x0f.guest.v1.PartyR\x05party\";\n" +
+	"\x12UpdatePartyRequest\x12%\n" +
+	"\x05party\x18\x01 \x01(\v2\x0f.guest.v1.PartyR\x05party\"<\n" +
+	"\x13UpdatePartyResponse\x12%\n" +
+	"\x05party\x18\x01 \x01(\v2\x0f.guest.v1.PartyR\x05party\"(\n" +
+	"\x12DeletePartyRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name2\xf3\x03\n" +
 	"\fGuestService\x12C\n" +
-	"\bGetParty\x12\x19.guest.v1.GetPartyRequest\x1a\x1a.guest.v1.GetPartyResponse\"\x00\x12L\n" +
-	"\vCreateParty\x12\x1c.guest.v1.CreatePartyRequest\x1a\x1d.guest.v1.CreatePartyResponse\"\x00B&Z$getting-married/gen/guest/v1;guestv1b\x06proto3"
+	"\bGetParty\x12\x19.guest.v1.GetPartyRequest\x1a\x1a.guest.v1.GetPartyResponse\"\x00\x12m\n" +
+	"\x16UpdatePartyContactInfo\x12'.guest.v1.UpdatePartyContactInfoRequest\x1a(.guest.v1.UpdatePartyContactInfoResponse\"\x00\x12L\n" +
+	"\vListParties\x12\x1c.guest.v1.ListPartiesRequest\x1a\x1d.guest.v1.ListPartiesResponse\"\x00\x12L\n" +
+	"\vCreateParty\x12\x1c.guest.v1.CreatePartyRequest\x1a\x1d.guest.v1.CreatePartyResponse\"\x00\x12L\n" +
+	"\vUpdateParty\x12\x1c.guest.v1.UpdatePartyRequest\x1a\x1d.guest.v1.UpdatePartyResponse\"\x00\x12E\n" +
+	"\vDeleteParty\x12\x1c.guest.v1.DeletePartyRequest\x1a\x16.google.protobuf.Empty\"\x00B&Z$getting-married/gen/guest/v1;guestv1b\x06proto3"
 
 var (
 	file_guest_v1_guest_service_proto_rawDescOnce sync.Once
@@ -226,27 +562,51 @@ func file_guest_v1_guest_service_proto_rawDescGZIP() []byte {
 	return file_guest_v1_guest_service_proto_rawDescData
 }
 
-var file_guest_v1_guest_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_guest_v1_guest_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_guest_v1_guest_service_proto_goTypes = []any{
-	(*GetPartyRequest)(nil),     // 0: guest.v1.GetPartyRequest
-	(*GetPartyResponse)(nil),    // 1: guest.v1.GetPartyResponse
-	(*CreatePartyRequest)(nil),  // 2: guest.v1.CreatePartyRequest
-	(*CreatePartyResponse)(nil), // 3: guest.v1.CreatePartyResponse
-	(*Party)(nil),               // 4: guest.v1.Party
+	(*GetPartyRequest)(nil),                // 0: guest.v1.GetPartyRequest
+	(*GetPartyResponse)(nil),               // 1: guest.v1.GetPartyResponse
+	(*UpdatePartyContactInfoRequest)(nil),  // 2: guest.v1.UpdatePartyContactInfoRequest
+	(*UpdatePartyContactInfoResponse)(nil), // 3: guest.v1.UpdatePartyContactInfoResponse
+	(*ListPartiesRequest)(nil),             // 4: guest.v1.ListPartiesRequest
+	(*ListPartiesResponse)(nil),            // 5: guest.v1.ListPartiesResponse
+	(*CreatePartyRequest)(nil),             // 6: guest.v1.CreatePartyRequest
+	(*CreatePartyResponse)(nil),            // 7: guest.v1.CreatePartyResponse
+	(*UpdatePartyRequest)(nil),             // 8: guest.v1.UpdatePartyRequest
+	(*UpdatePartyResponse)(nil),            // 9: guest.v1.UpdatePartyResponse
+	(*DeletePartyRequest)(nil),             // 10: guest.v1.DeletePartyRequest
+	(*Party)(nil),                          // 11: guest.v1.Party
+	(*Party_Address)(nil),                  // 12: guest.v1.Party.Address
+	(*Party_Contact)(nil),                  // 13: guest.v1.Party.Contact
+	(*emptypb.Empty)(nil),                  // 14: google.protobuf.Empty
 }
 var file_guest_v1_guest_service_proto_depIdxs = []int32{
-	4, // 0: guest.v1.GetPartyResponse.party:type_name -> guest.v1.Party
-	4, // 1: guest.v1.CreatePartyRequest.party:type_name -> guest.v1.Party
-	4, // 2: guest.v1.CreatePartyResponse.party:type_name -> guest.v1.Party
-	0, // 3: guest.v1.GuestService.GetParty:input_type -> guest.v1.GetPartyRequest
-	2, // 4: guest.v1.GuestService.CreateParty:input_type -> guest.v1.CreatePartyRequest
-	1, // 5: guest.v1.GuestService.GetParty:output_type -> guest.v1.GetPartyResponse
-	3, // 6: guest.v1.GuestService.CreateParty:output_type -> guest.v1.CreatePartyResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	11, // 0: guest.v1.GetPartyResponse.party:type_name -> guest.v1.Party
+	12, // 1: guest.v1.UpdatePartyContactInfoRequest.address:type_name -> guest.v1.Party.Address
+	13, // 2: guest.v1.UpdatePartyContactInfoRequest.contact:type_name -> guest.v1.Party.Contact
+	11, // 3: guest.v1.UpdatePartyContactInfoResponse.party:type_name -> guest.v1.Party
+	11, // 4: guest.v1.ListPartiesResponse.parties:type_name -> guest.v1.Party
+	11, // 5: guest.v1.CreatePartyRequest.party:type_name -> guest.v1.Party
+	11, // 6: guest.v1.CreatePartyResponse.party:type_name -> guest.v1.Party
+	11, // 7: guest.v1.UpdatePartyRequest.party:type_name -> guest.v1.Party
+	11, // 8: guest.v1.UpdatePartyResponse.party:type_name -> guest.v1.Party
+	0,  // 9: guest.v1.GuestService.GetParty:input_type -> guest.v1.GetPartyRequest
+	2,  // 10: guest.v1.GuestService.UpdatePartyContactInfo:input_type -> guest.v1.UpdatePartyContactInfoRequest
+	4,  // 11: guest.v1.GuestService.ListParties:input_type -> guest.v1.ListPartiesRequest
+	6,  // 12: guest.v1.GuestService.CreateParty:input_type -> guest.v1.CreatePartyRequest
+	8,  // 13: guest.v1.GuestService.UpdateParty:input_type -> guest.v1.UpdatePartyRequest
+	10, // 14: guest.v1.GuestService.DeleteParty:input_type -> guest.v1.DeletePartyRequest
+	1,  // 15: guest.v1.GuestService.GetParty:output_type -> guest.v1.GetPartyResponse
+	3,  // 16: guest.v1.GuestService.UpdatePartyContactInfo:output_type -> guest.v1.UpdatePartyContactInfoResponse
+	5,  // 17: guest.v1.GuestService.ListParties:output_type -> guest.v1.ListPartiesResponse
+	7,  // 18: guest.v1.GuestService.CreateParty:output_type -> guest.v1.CreatePartyResponse
+	9,  // 19: guest.v1.GuestService.UpdateParty:output_type -> guest.v1.UpdatePartyResponse
+	14, // 20: guest.v1.GuestService.DeleteParty:output_type -> google.protobuf.Empty
+	15, // [15:21] is the sub-list for method output_type
+	9,  // [9:15] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_guest_v1_guest_service_proto_init() }
@@ -261,7 +621,7 @@ func file_guest_v1_guest_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_guest_v1_guest_service_proto_rawDesc), len(file_guest_v1_guest_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

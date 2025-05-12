@@ -7,7 +7,10 @@ import (
 
 	"connectrpc.com/connect"
 	"github.com/boltdb/bolt"
+	"github.com/google/uuid"
 )
+
+var testPassword = uuid.NewString()
 
 func TestSetGetParty(t *testing.T) {
 	boltPath := filepath.Join(t.TempDir(), "test.db")
@@ -17,7 +20,7 @@ func TestSetGetParty(t *testing.T) {
 	}
 	defer boltDB.Close()
 
-	server, err := NewServer(boltDB)
+	server, err := NewServer(boltDB, testPassword)
 	if err != nil {
 		t.Fatalf("failed to create server: %v", err)
 	}

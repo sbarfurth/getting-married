@@ -149,7 +149,6 @@ func (x *RSVP) GetUpdatedAt() *timestamppb.Timestamp {
 
 type Guest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	FirstName     string                 `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
 	LastName      string                 `protobuf:"bytes,3,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
 	Rsvp          *RSVP                  `protobuf:"bytes,4,opt,name=rsvp,proto3" json:"rsvp,omitempty"`
@@ -187,13 +186,6 @@ func (*Guest) Descriptor() ([]byte, []int) {
 	return file_guest_v1_guest_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Guest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
 func (x *Guest) GetFirstName() string {
 	if x != nil {
 		return x.FirstName
@@ -221,13 +213,12 @@ type Party struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	Name        string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	DisplayName string                 `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Manager     *Guest                 `protobuf:"bytes,3,opt,name=manager,proto3" json:"manager,omitempty"`
-	Guests      []*Guest               `protobuf:"bytes,4,rep,name=guests,proto3" json:"guests,omitempty"`
-	// Maximum number of guests in this party, not including the party manager.
-	MaxGuests     int32                  `protobuf:"varint,5,opt,name=max_guests,json=maxGuests,proto3" json:"max_guests,omitempty"`
-	Address       *Party_Address         `protobuf:"bytes,6,opt,name=address,proto3" json:"address,omitempty"`
-	Contact       *Party_Contact         `protobuf:"bytes,7,opt,name=contact,proto3" json:"contact,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Guests      []*Guest               `protobuf:"bytes,3,rep,name=guests,proto3" json:"guests,omitempty"`
+	// Maximum number of guests in this party.
+	MaxGuests     int32                  `protobuf:"varint,4,opt,name=max_guests,json=maxGuests,proto3" json:"max_guests,omitempty"`
+	Address       *Party_Address         `protobuf:"bytes,5,opt,name=address,proto3" json:"address,omitempty"`
+	Contact       *Party_Contact         `protobuf:"bytes,6,opt,name=contact,proto3" json:"contact,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -274,13 +265,6 @@ func (x *Party) GetDisplayName() string {
 		return x.DisplayName
 	}
 	return ""
-}
-
-func (x *Party) GetManager() *Guest {
-	if x != nil {
-		return x.Manager
-	}
-	return nil
 }
 
 func (x *Party) GetGuests() []*Guest {
@@ -445,24 +429,22 @@ const file_guest_v1_guest_proto_rawDesc = "" +
 	"\bResponse\x12\x18\n" +
 	"\x14RESPONSE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11RESPONSE_ACCEPTED\x10\x01\x12\x15\n" +
-	"\x11RESPONSE_DECLINED\x10\x02\"{\n" +
-	"\x05Guest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
+	"\x11RESPONSE_DECLINED\x10\x02\"g\n" +
+	"\x05Guest\x12\x1d\n" +
 	"\n" +
 	"first_name\x18\x02 \x01(\tR\tfirstName\x12\x1b\n" +
 	"\tlast_name\x18\x03 \x01(\tR\blastName\x12\"\n" +
-	"\x04rsvp\x18\x04 \x01(\v2\x0e.guest.v1.RSVPR\x04rsvp\"\xe1\x03\n" +
+	"\x04rsvp\x18\x04 \x01(\v2\x0e.guest.v1.RSVPR\x04rsvp\"\xb6\x03\n" +
 	"\x05Party\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
-	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12)\n" +
-	"\amanager\x18\x03 \x01(\v2\x0f.guest.v1.GuestR\amanager\x12'\n" +
-	"\x06guests\x18\x04 \x03(\v2\x0f.guest.v1.GuestR\x06guests\x12\x1d\n" +
+	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12'\n" +
+	"\x06guests\x18\x03 \x03(\v2\x0f.guest.v1.GuestR\x06guests\x12\x1d\n" +
 	"\n" +
-	"max_guests\x18\x05 \x01(\x05R\tmaxGuests\x121\n" +
-	"\aaddress\x18\x06 \x01(\v2\x17.guest.v1.Party.AddressR\aaddress\x121\n" +
-	"\acontact\x18\a \x01(\v2\x17.guest.v1.Party.ContactR\acontact\x129\n" +
+	"max_guests\x18\x04 \x01(\x05R\tmaxGuests\x121\n" +
+	"\aaddress\x18\x05 \x01(\v2\x17.guest.v1.Party.AddressR\aaddress\x121\n" +
+	"\acontact\x18\x06 \x01(\v2\x17.guest.v1.Party.ContactR\acontact\x129\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1aV\n" +
+	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1aV\n" +
 	"\aAddress\x12\x16\n" +
 	"\x06street\x18\x01 \x01(\tR\x06street\x12\x1f\n" +
 	"\vpostal_code\x18\x02 \x01(\tR\n" +
@@ -499,16 +481,15 @@ var file_guest_v1_guest_proto_depIdxs = []int32{
 	0, // 0: guest.v1.RSVP.response:type_name -> guest.v1.RSVP.Response
 	6, // 1: guest.v1.RSVP.updated_at:type_name -> google.protobuf.Timestamp
 	1, // 2: guest.v1.Guest.rsvp:type_name -> guest.v1.RSVP
-	2, // 3: guest.v1.Party.manager:type_name -> guest.v1.Guest
-	2, // 4: guest.v1.Party.guests:type_name -> guest.v1.Guest
-	4, // 5: guest.v1.Party.address:type_name -> guest.v1.Party.Address
-	5, // 6: guest.v1.Party.contact:type_name -> guest.v1.Party.Contact
-	6, // 7: guest.v1.Party.updated_at:type_name -> google.protobuf.Timestamp
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	2, // 3: guest.v1.Party.guests:type_name -> guest.v1.Guest
+	4, // 4: guest.v1.Party.address:type_name -> guest.v1.Party.Address
+	5, // 5: guest.v1.Party.contact:type_name -> guest.v1.Party.Contact
+	6, // 6: guest.v1.Party.updated_at:type_name -> google.protobuf.Timestamp
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_guest_v1_guest_proto_init() }

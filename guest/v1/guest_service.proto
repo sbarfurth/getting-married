@@ -3,12 +3,19 @@ syntax = "proto3";
 package guest.v1;
 
 import "guest/v1/guest.proto";
+import "google/protobuf/empty.proto";
 
 option go_package = "getting-married/gen/guest/v1;guestv1";
 
 service GuestService {
   rpc GetParty(GetPartyRequest) returns (GetPartyResponse) {}
+  rpc UpdatePartyContactInfo(UpdatePartyContactInfoRequest) returns (UpdatePartyContactInfoResponse) {}
+
+  // Admin only APIs.
+  rpc ListParties(ListPartiesRequest) returns (ListPartiesResponse) {}
   rpc CreateParty(CreatePartyRequest) returns (CreatePartyResponse) {}
+  rpc UpdateParty(UpdatePartyRequest) returns (UpdatePartyResponse) {}
+  rpc DeleteParty(DeletePartyRequest) returns (google.protobuf.Empty) {}
 }
 
 message GetPartyRequest {
@@ -19,10 +26,38 @@ message GetPartyResponse {
   Party party = 1;
 }
 
+message UpdatePartyContactInfoRequest {
+  string name = 1;
+  Party.Address address = 2;
+  Party.Contact contact = 3;
+}
+
+message UpdatePartyContactInfoResponse {
+  Party party = 1;
+}
+
+message ListPartiesRequest {}
+
+message ListPartiesResponse {
+  repeated Party parties = 1;
+}
+
 message CreatePartyRequest {
   Party party = 1;
 }
 
 message CreatePartyResponse {
   Party party = 1;
+}
+
+message UpdatePartyRequest {
+  Party party = 1;
+}
+
+message UpdatePartyResponse {
+  Party party = 1;
+}
+
+message DeletePartyRequest {
+  string name = 1;
 }

@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file guest/v1/guest.proto.
  */
 export const file_guest_v1_guest: GenFile = /*@__PURE__*/
-  fileDesc("ChRndWVzdC92MS9ndWVzdC5wcm90bxIIZ3Vlc3QudjEi9wEKBFJTVlASKQoIcmVzcG9uc2UYAyABKA4yFy5ndWVzdC52MS5SU1ZQLlJlc3BvbnNlEhwKFGRpZXRhcnlfcmVzdHJpY3Rpb25zGAQgASgJEhQKDG11c2ljX3dpc2hlcxgFIAEoCRIMCgRub3RlGAYgASgJEi4KCnVwZGF0ZWRfYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIlIKCFJlc3BvbnNlEhgKFFJFU1BPTlNFX1VOU1BFQ0lGSUVEEAASFQoRUkVTUE9OU0VfQUNDRVBURUQQARIVChFSRVNQT05TRV9ERUNMSU5FRBACIloKBUd1ZXN0EgwKBG5hbWUYASABKAkSEgoKZmlyc3RfbmFtZRgCIAEoCRIRCglsYXN0X25hbWUYAyABKAkSHAoEcnN2cBgEIAEoCzIOLmd1ZXN0LnYxLlJTVlAi7QIKBVBhcnR5EgwKBG5hbWUYASABKAkSFAoMZGlzcGxheV9uYW1lGAIgASgJEiAKB21hbmFnZXIYAyABKAsyDy5ndWVzdC52MS5HdWVzdBIfCgZndWVzdHMYBCADKAsyDy5ndWVzdC52MS5HdWVzdBISCgptYXhfZ3Vlc3RzGAUgASgFEigKB2FkZHJlc3MYBiABKAsyFy5ndWVzdC52MS5QYXJ0eS5BZGRyZXNzEigKB2NvbnRhY3QYByABKAsyFy5ndWVzdC52MS5QYXJ0eS5Db250YWN0Ei4KCnVwZGF0ZWRfYXQYCCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wGjwKB0FkZHJlc3MSDgoGc3RyZWV0GAEgASgJEhMKC3Bvc3RhbF9jb2RlGAIgASgJEgwKBGNpdHkYAyABKAkaJwoHQ29udGFjdBINCgVlbWFpbBgBIAEoCRINCgVwaG9uZRgCIAEoCUImWiRnZXR0aW5nLW1hcnJpZWQvZ2VuL2d1ZXN0L3YxO2d1ZXN0djFiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("ChRndWVzdC92MS9ndWVzdC5wcm90bxIIZ3Vlc3QudjEi9wEKBFJTVlASKQoIcmVzcG9uc2UYAyABKA4yFy5ndWVzdC52MS5SU1ZQLlJlc3BvbnNlEhwKFGRpZXRhcnlfcmVzdHJpY3Rpb25zGAQgASgJEhQKDG11c2ljX3dpc2hlcxgFIAEoCRIMCgRub3RlGAYgASgJEi4KCnVwZGF0ZWRfYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIlIKCFJlc3BvbnNlEhgKFFJFU1BPTlNFX1VOU1BFQ0lGSUVEEAASFQoRUkVTUE9OU0VfQUNDRVBURUQQARIVChFSRVNQT05TRV9ERUNMSU5FRBACIkwKBUd1ZXN0EhIKCmZpcnN0X25hbWUYAiABKAkSEQoJbGFzdF9uYW1lGAMgASgJEhwKBHJzdnAYBCABKAsyDi5ndWVzdC52MS5SU1ZQIssCCgVQYXJ0eRIMCgRuYW1lGAEgASgJEhQKDGRpc3BsYXlfbmFtZRgCIAEoCRIfCgZndWVzdHMYAyADKAsyDy5ndWVzdC52MS5HdWVzdBISCgptYXhfZ3Vlc3RzGAQgASgFEigKB2FkZHJlc3MYBSABKAsyFy5ndWVzdC52MS5QYXJ0eS5BZGRyZXNzEigKB2NvbnRhY3QYBiABKAsyFy5ndWVzdC52MS5QYXJ0eS5Db250YWN0Ei4KCnVwZGF0ZWRfYXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wGjwKB0FkZHJlc3MSDgoGc3RyZWV0GAEgASgJEhMKC3Bvc3RhbF9jb2RlGAIgASgJEgwKBGNpdHkYAyABKAkaJwoHQ29udGFjdBINCgVlbWFpbBgBIAEoCRINCgVwaG9uZRgCIAEoCUImWiRnZXR0aW5nLW1hcnJpZWQvZ2VuL2d1ZXN0L3YxO2d1ZXN0djFiBnByb3RvMw", [file_google_protobuf_timestamp]);
 
 /**
  * @generated from message guest.v1.RSVP
@@ -82,11 +82,6 @@ export const RSVP_ResponseSchema: GenEnum<RSVP_Response> = /*@__PURE__*/
  */
 export type Guest = Message<"guest.v1.Guest"> & {
   /**
-   * @generated from field: string name = 1;
-   */
-  name: string;
-
-  /**
    * @generated from field: string first_name = 2;
    */
   firstName: string;
@@ -127,34 +122,29 @@ export type Party = Message<"guest.v1.Party"> & {
   displayName: string;
 
   /**
-   * @generated from field: guest.v1.Guest manager = 3;
-   */
-  manager?: Guest;
-
-  /**
-   * @generated from field: repeated guest.v1.Guest guests = 4;
+   * @generated from field: repeated guest.v1.Guest guests = 3;
    */
   guests: Guest[];
 
   /**
-   * Maximum number of guests in this party, not including the party manager.
+   * Maximum number of guests in this party.
    *
-   * @generated from field: int32 max_guests = 5;
+   * @generated from field: int32 max_guests = 4;
    */
   maxGuests: number;
 
   /**
-   * @generated from field: guest.v1.Party.Address address = 6;
+   * @generated from field: guest.v1.Party.Address address = 5;
    */
   address?: Party_Address;
 
   /**
-   * @generated from field: guest.v1.Party.Contact contact = 7;
+   * @generated from field: guest.v1.Party.Contact contact = 6;
    */
   contact?: Party_Contact;
 
   /**
-   * @generated from field: google.protobuf.Timestamp updated_at = 8;
+   * @generated from field: google.protobuf.Timestamp updated_at = 7;
    */
   updatedAt?: Timestamp;
 };

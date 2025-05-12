@@ -4,15 +4,17 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
-import type { Party } from "./guest_pb";
+import type { Party, Party_Address, Party_Contact } from "./guest_pb";
 import { file_guest_v1_guest } from "./guest_pb";
+import type { EmptySchema } from "@bufbuild/protobuf/wkt";
+import { file_google_protobuf_empty } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file guest/v1/guest_service.proto.
  */
 export const file_guest_v1_guest_service: GenFile = /*@__PURE__*/
-  fileDesc("ChxndWVzdC92MS9ndWVzdF9zZXJ2aWNlLnByb3RvEghndWVzdC52MSIfCg9HZXRQYXJ0eVJlcXVlc3QSDAoEbmFtZRgBIAEoCSIyChBHZXRQYXJ0eVJlc3BvbnNlEh4KBXBhcnR5GAEgASgLMg8uZ3Vlc3QudjEuUGFydHkiNAoSQ3JlYXRlUGFydHlSZXF1ZXN0Eh4KBXBhcnR5GAEgASgLMg8uZ3Vlc3QudjEuUGFydHkiNQoTQ3JlYXRlUGFydHlSZXNwb25zZRIeCgVwYXJ0eRgBIAEoCzIPLmd1ZXN0LnYxLlBhcnR5MqEBCgxHdWVzdFNlcnZpY2USQwoIR2V0UGFydHkSGS5ndWVzdC52MS5HZXRQYXJ0eVJlcXVlc3QaGi5ndWVzdC52MS5HZXRQYXJ0eVJlc3BvbnNlIgASTAoLQ3JlYXRlUGFydHkSHC5ndWVzdC52MS5DcmVhdGVQYXJ0eVJlcXVlc3QaHS5ndWVzdC52MS5DcmVhdGVQYXJ0eVJlc3BvbnNlIgBCJlokZ2V0dGluZy1tYXJyaWVkL2dlbi9ndWVzdC92MTtndWVzdHYxYgZwcm90bzM", [file_guest_v1_guest]);
+  fileDesc("ChxndWVzdC92MS9ndWVzdF9zZXJ2aWNlLnByb3RvEghndWVzdC52MSIfCg9HZXRQYXJ0eVJlcXVlc3QSDAoEbmFtZRgBIAEoCSIyChBHZXRQYXJ0eVJlc3BvbnNlEh4KBXBhcnR5GAEgASgLMg8uZ3Vlc3QudjEuUGFydHkigQEKHVVwZGF0ZVBhcnR5Q29udGFjdEluZm9SZXF1ZXN0EgwKBG5hbWUYASABKAkSKAoHYWRkcmVzcxgCIAEoCzIXLmd1ZXN0LnYxLlBhcnR5LkFkZHJlc3MSKAoHY29udGFjdBgDIAEoCzIXLmd1ZXN0LnYxLlBhcnR5LkNvbnRhY3QiQAoeVXBkYXRlUGFydHlDb250YWN0SW5mb1Jlc3BvbnNlEh4KBXBhcnR5GAEgASgLMg8uZ3Vlc3QudjEuUGFydHkiFAoSTGlzdFBhcnRpZXNSZXF1ZXN0IjcKE0xpc3RQYXJ0aWVzUmVzcG9uc2USIAoHcGFydGllcxgBIAMoCzIPLmd1ZXN0LnYxLlBhcnR5IjQKEkNyZWF0ZVBhcnR5UmVxdWVzdBIeCgVwYXJ0eRgBIAEoCzIPLmd1ZXN0LnYxLlBhcnR5IjUKE0NyZWF0ZVBhcnR5UmVzcG9uc2USHgoFcGFydHkYASABKAsyDy5ndWVzdC52MS5QYXJ0eSI0ChJVcGRhdGVQYXJ0eVJlcXVlc3QSHgoFcGFydHkYASABKAsyDy5ndWVzdC52MS5QYXJ0eSI1ChNVcGRhdGVQYXJ0eVJlc3BvbnNlEh4KBXBhcnR5GAEgASgLMg8uZ3Vlc3QudjEuUGFydHkiIgoSRGVsZXRlUGFydHlSZXF1ZXN0EgwKBG5hbWUYASABKAky8wMKDEd1ZXN0U2VydmljZRJDCghHZXRQYXJ0eRIZLmd1ZXN0LnYxLkdldFBhcnR5UmVxdWVzdBoaLmd1ZXN0LnYxLkdldFBhcnR5UmVzcG9uc2UiABJtChZVcGRhdGVQYXJ0eUNvbnRhY3RJbmZvEicuZ3Vlc3QudjEuVXBkYXRlUGFydHlDb250YWN0SW5mb1JlcXVlc3QaKC5ndWVzdC52MS5VcGRhdGVQYXJ0eUNvbnRhY3RJbmZvUmVzcG9uc2UiABJMCgtMaXN0UGFydGllcxIcLmd1ZXN0LnYxLkxpc3RQYXJ0aWVzUmVxdWVzdBodLmd1ZXN0LnYxLkxpc3RQYXJ0aWVzUmVzcG9uc2UiABJMCgtDcmVhdGVQYXJ0eRIcLmd1ZXN0LnYxLkNyZWF0ZVBhcnR5UmVxdWVzdBodLmd1ZXN0LnYxLkNyZWF0ZVBhcnR5UmVzcG9uc2UiABJMCgtVcGRhdGVQYXJ0eRIcLmd1ZXN0LnYxLlVwZGF0ZVBhcnR5UmVxdWVzdBodLmd1ZXN0LnYxLlVwZGF0ZVBhcnR5UmVzcG9uc2UiABJFCgtEZWxldGVQYXJ0eRIcLmd1ZXN0LnYxLkRlbGV0ZVBhcnR5UmVxdWVzdBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eSIAQiZaJGdldHRpbmctbWFycmllZC9nZW4vZ3Vlc3QvdjE7Z3Vlc3R2MWIGcHJvdG8z", [file_guest_v1_guest, file_google_protobuf_empty]);
 
 /**
  * @generated from message guest.v1.GetPartyRequest
@@ -49,6 +51,80 @@ export const GetPartyResponseSchema: GenMessage<GetPartyResponse> = /*@__PURE__*
   messageDesc(file_guest_v1_guest_service, 1);
 
 /**
+ * @generated from message guest.v1.UpdatePartyContactInfoRequest
+ */
+export type UpdatePartyContactInfoRequest = Message<"guest.v1.UpdatePartyContactInfoRequest"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * @generated from field: guest.v1.Party.Address address = 2;
+   */
+  address?: Party_Address;
+
+  /**
+   * @generated from field: guest.v1.Party.Contact contact = 3;
+   */
+  contact?: Party_Contact;
+};
+
+/**
+ * Describes the message guest.v1.UpdatePartyContactInfoRequest.
+ * Use `create(UpdatePartyContactInfoRequestSchema)` to create a new message.
+ */
+export const UpdatePartyContactInfoRequestSchema: GenMessage<UpdatePartyContactInfoRequest> = /*@__PURE__*/
+  messageDesc(file_guest_v1_guest_service, 2);
+
+/**
+ * @generated from message guest.v1.UpdatePartyContactInfoResponse
+ */
+export type UpdatePartyContactInfoResponse = Message<"guest.v1.UpdatePartyContactInfoResponse"> & {
+  /**
+   * @generated from field: guest.v1.Party party = 1;
+   */
+  party?: Party;
+};
+
+/**
+ * Describes the message guest.v1.UpdatePartyContactInfoResponse.
+ * Use `create(UpdatePartyContactInfoResponseSchema)` to create a new message.
+ */
+export const UpdatePartyContactInfoResponseSchema: GenMessage<UpdatePartyContactInfoResponse> = /*@__PURE__*/
+  messageDesc(file_guest_v1_guest_service, 3);
+
+/**
+ * @generated from message guest.v1.ListPartiesRequest
+ */
+export type ListPartiesRequest = Message<"guest.v1.ListPartiesRequest"> & {
+};
+
+/**
+ * Describes the message guest.v1.ListPartiesRequest.
+ * Use `create(ListPartiesRequestSchema)` to create a new message.
+ */
+export const ListPartiesRequestSchema: GenMessage<ListPartiesRequest> = /*@__PURE__*/
+  messageDesc(file_guest_v1_guest_service, 4);
+
+/**
+ * @generated from message guest.v1.ListPartiesResponse
+ */
+export type ListPartiesResponse = Message<"guest.v1.ListPartiesResponse"> & {
+  /**
+   * @generated from field: repeated guest.v1.Party parties = 1;
+   */
+  parties: Party[];
+};
+
+/**
+ * Describes the message guest.v1.ListPartiesResponse.
+ * Use `create(ListPartiesResponseSchema)` to create a new message.
+ */
+export const ListPartiesResponseSchema: GenMessage<ListPartiesResponse> = /*@__PURE__*/
+  messageDesc(file_guest_v1_guest_service, 5);
+
+/**
  * @generated from message guest.v1.CreatePartyRequest
  */
 export type CreatePartyRequest = Message<"guest.v1.CreatePartyRequest"> & {
@@ -63,7 +139,7 @@ export type CreatePartyRequest = Message<"guest.v1.CreatePartyRequest"> & {
  * Use `create(CreatePartyRequestSchema)` to create a new message.
  */
 export const CreatePartyRequestSchema: GenMessage<CreatePartyRequest> = /*@__PURE__*/
-  messageDesc(file_guest_v1_guest_service, 2);
+  messageDesc(file_guest_v1_guest_service, 6);
 
 /**
  * @generated from message guest.v1.CreatePartyResponse
@@ -80,7 +156,58 @@ export type CreatePartyResponse = Message<"guest.v1.CreatePartyResponse"> & {
  * Use `create(CreatePartyResponseSchema)` to create a new message.
  */
 export const CreatePartyResponseSchema: GenMessage<CreatePartyResponse> = /*@__PURE__*/
-  messageDesc(file_guest_v1_guest_service, 3);
+  messageDesc(file_guest_v1_guest_service, 7);
+
+/**
+ * @generated from message guest.v1.UpdatePartyRequest
+ */
+export type UpdatePartyRequest = Message<"guest.v1.UpdatePartyRequest"> & {
+  /**
+   * @generated from field: guest.v1.Party party = 1;
+   */
+  party?: Party;
+};
+
+/**
+ * Describes the message guest.v1.UpdatePartyRequest.
+ * Use `create(UpdatePartyRequestSchema)` to create a new message.
+ */
+export const UpdatePartyRequestSchema: GenMessage<UpdatePartyRequest> = /*@__PURE__*/
+  messageDesc(file_guest_v1_guest_service, 8);
+
+/**
+ * @generated from message guest.v1.UpdatePartyResponse
+ */
+export type UpdatePartyResponse = Message<"guest.v1.UpdatePartyResponse"> & {
+  /**
+   * @generated from field: guest.v1.Party party = 1;
+   */
+  party?: Party;
+};
+
+/**
+ * Describes the message guest.v1.UpdatePartyResponse.
+ * Use `create(UpdatePartyResponseSchema)` to create a new message.
+ */
+export const UpdatePartyResponseSchema: GenMessage<UpdatePartyResponse> = /*@__PURE__*/
+  messageDesc(file_guest_v1_guest_service, 9);
+
+/**
+ * @generated from message guest.v1.DeletePartyRequest
+ */
+export type DeletePartyRequest = Message<"guest.v1.DeletePartyRequest"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+};
+
+/**
+ * Describes the message guest.v1.DeletePartyRequest.
+ * Use `create(DeletePartyRequestSchema)` to create a new message.
+ */
+export const DeletePartyRequestSchema: GenMessage<DeletePartyRequest> = /*@__PURE__*/
+  messageDesc(file_guest_v1_guest_service, 10);
 
 /**
  * @generated from service guest.v1.GuestService
@@ -95,12 +222,46 @@ export const GuestService: GenService<{
     output: typeof GetPartyResponseSchema;
   },
   /**
+   * @generated from rpc guest.v1.GuestService.UpdatePartyContactInfo
+   */
+  updatePartyContactInfo: {
+    methodKind: "unary";
+    input: typeof UpdatePartyContactInfoRequestSchema;
+    output: typeof UpdatePartyContactInfoResponseSchema;
+  },
+  /**
+   * Admin only APIs.
+   *
+   * @generated from rpc guest.v1.GuestService.ListParties
+   */
+  listParties: {
+    methodKind: "unary";
+    input: typeof ListPartiesRequestSchema;
+    output: typeof ListPartiesResponseSchema;
+  },
+  /**
    * @generated from rpc guest.v1.GuestService.CreateParty
    */
   createParty: {
     methodKind: "unary";
     input: typeof CreatePartyRequestSchema;
     output: typeof CreatePartyResponseSchema;
+  },
+  /**
+   * @generated from rpc guest.v1.GuestService.UpdateParty
+   */
+  updateParty: {
+    methodKind: "unary";
+    input: typeof UpdatePartyRequestSchema;
+    output: typeof UpdatePartyResponseSchema;
+  },
+  /**
+   * @generated from rpc guest.v1.GuestService.DeleteParty
+   */
+  deleteParty: {
+    methodKind: "unary";
+    input: typeof DeletePartyRequestSchema;
+    output: typeof EmptySchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_guest_v1_guest_service, 0);

@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-adlam: 'ADLaM Display', sans-serif;
+
+  --color-beige-500: oklch(0.95 0.0258 29.42);
+  --color-orange-500: oklch(0.68 0.2128 40.32);
+  --color-orange-600: oklch(0.67 0.2111 32.37);
+  --color-blue-500: oklch(0.71 0.0782 242.63);
+  --color-pink-500: oklch(0.65 0.1845 5.39);
+  --color-yellow-500: oklch(0.91 0.1373 97.71);
+}
+
+:root {
+  overscroll-behavior: none;
+  overflow-x: hidden;
+}
+
+body {
+  background: oklch(0.95 0.0258 29.42);
+}
