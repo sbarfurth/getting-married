@@ -21,7 +21,7 @@
         throw new Error(await rawResponse.text());
       }
     } catch (e: unknown) {
-      console.log('failed to log in:', e);
+      alert(`Login fehlgeschlagen: ${(e as Error).message}`);
     }
   }
 

@@ -2,6 +2,7 @@
   import type { Party } from '../../../../gen/guest/v1/guest_pb';
   import ContactDataForm from './ContactDataForm.svelte';
   import { client } from './guest_client';
+  import titleImg from '../../assets/title.png';
 
   const SCROLL_FULL = 200;
 
@@ -33,7 +34,7 @@
 {:then party}
   <div class="flex h-screen w-screen items-center justify-center">
     <img
-      src="./assets/title.png"
+      src={titleImg}
       alt="Titelbild"
       class="pointer-events-none h-auto w-full md:h-full md:w-auto"
     />
