@@ -79,7 +79,7 @@ func main() {
 
 	var allowedOrigins []string
 	for _, allowedOrigin := range strings.Split(*allowedOriginsRaw, ",") {
-		allowedOrigins = append(allowedOrigins, strings.TrimSpace(allowedOrigin)))
+		allowedOrigins = append(allowedOrigins, strings.TrimSpace(allowedOrigin))
 	}
 
 	c := cors.New(cors.Options{
