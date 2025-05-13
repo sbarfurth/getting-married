@@ -8,6 +8,7 @@ import (
 	"getting-married/guest"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/boltdb/bolt"
 	"github.com/rs/cors"
@@ -16,9 +17,10 @@ import (
 )
 
 var (
-	port          = flag.Int("port", 8080, "The port at the server listens.")
-	dbPath        = flag.String("db_path", "getting_married.db", "Path to the BoltDB database file.")
-	adminPassword = flag.String("admin_password", "", "Password to access the admin interface.")
+	port              = flag.Int("port", 8080, "The port at the server listens.")
+	dbPath            = flag.String("db_path", "getting_married.db", "Path to the BoltDB database file.")
+	adminPassword     = flag.String("admin_password", "", "Password to access the admin interface.")
+	allowedOriginsRaw = flag.String("allowed_origins", "http://localhost:*", "Comma-separated list of allowed origins for CORS.")
 )
 
 type loginRequest struct {
@@ -75,8 +77,13 @@ func main() {
 
 	h2cHandler := h2c.NewHandler(mux, &http2.Server{})
 
+	var allowedOrigins []string
+	for _, allowedOrigin := range strings.Split(*allowedOriginsRaw, ",") {
+		allowedOrigins = append(allowedOrigins, strings.TrimSpace(allowedOrigin)))
+	}
+
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:*", "https://sarah-und-sebastian-hochzeit.de"},
+		AllowedOrigins: allowedOrigins,
 		AllowedHeaders: []string{"connect-protocol-version", "content-type", "authorization"},
 	})
 	corsHandler := c.Handler(h2cHandler)
