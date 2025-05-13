@@ -3,7 +3,7 @@
     GuestSchema,
     PartySchema,
     type Party,
-  } from '../../../../gen/guest/v1/guest_pb';
+  } from '../../../gen/guest/v1/guest_pb';
   import { client } from '../lib/guest_client';
   import { LABEL, INPUT, BUTTON } from '../../../styles/element_styles';
   import { create } from '@bufbuild/protobuf';

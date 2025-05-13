@@ -11,8 +11,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        party: resolve(__dirname, 'frontend/party/index.html'),
-        admin: resolve(__dirname, 'frontend/admin/index.html'),
+        party: resolve(__dirname, 'index.html'),
+        admin: resolve(__dirname, 'admin/index.html'),
       },
     },
   },

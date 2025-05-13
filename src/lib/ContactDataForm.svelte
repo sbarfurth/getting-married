@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Party } from '../../../../gen/guest/v1/guest_pb';
-  import { BUTTON, INPUT } from '../../../styles/element_styles';
+  import type { Party } from '../../gen/guest/v1/guest_pb';
+  import { BUTTON, INPUT } from '../../styles/element_styles';
   import { client } from './guest_client';
 
   let { party, close }: { party: Party; close: () => void } = $props();

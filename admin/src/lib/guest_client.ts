@@ -1,6 +1,6 @@
 import { createClient, type Interceptor } from '@connectrpc/connect';
 import { createConnectTransport } from '@connectrpc/connect-web';
-import { GuestService } from '../../../../gen/guest/v1/guest_service_pb';
+import { GuestService } from '../../../gen/guest/v1/guest_service_pb';
 import { getToken } from './auth';
 
 const ensureAuth: Interceptor = (next) => async (req) => {
