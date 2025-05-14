@@ -4,7 +4,7 @@
   import { client } from './guest_client';
 
   const SCROLL_FULL = 200;
-  const TOUCH_SCROLL_FACTOR = 0.4;
+  const TOUCH_SCROLL_FACTOR = 0.7;
 
   let titleImage = import.meta.env.VITE_TITLE_IMAGE_URL;
 
