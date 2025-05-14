@@ -36,7 +36,7 @@
       setTimeout(() => {
         close();
         closing = false;
-      }, 5000);
+      }, 8000);
     } catch (e: unknown) {
       alert('Speichern fehlgeschlagen :(');
     } finally {
@@ -55,14 +55,14 @@
       />
     {/if}
     <h1 class="mt-2 text-xl text-orange-500">Abgeschickt</h1>
-    <p class="text-blue-500">Bis bald!</p>
+    <p class="font-medium text-blue-500">Bis bald!</p>
   </div>
 {:else}
   <form class="m-4 flex w-sm max-w-full flex-col gap-4" onsubmit={save}>
     <h1 class="mb-2 text-center text-2xl text-orange-500">
       Lasst eure Daten für die Einladung da!
     </h1>
-    <div class="mb-4 text-center text-orange-500">
+    <div class="mb-4 text-center font-semibold text-orange-600">
       {#each party.guests as guest}
         <p>{guest.firstName} {guest.lastName}</p>
       {/each}
