@@ -83,7 +83,10 @@
   }
 
   function generateLink(party: Party): string {
-    const url = new URL(`${document.location.origin}?p=${party.name}`);
+    const canonicalDomain = import.meta.env.VITE_CANONICAL_URL;
+    const url = new URL(
+      `${canonicalDomain || document.location.origin}?p=${party.name}`,
+    );
     return url.toString();
   }
 

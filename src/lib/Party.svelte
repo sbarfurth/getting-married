@@ -2,20 +2,17 @@
   import type { Party } from '../../gen/guest/v1/guest_pb';
   import ContactDataForm from './ContactDataForm.svelte';
   import { client } from './guest_client';
-  import titleImg from '../../assets/title.png';
 
   const SCROLL_FULL = 200;
   const TOUCH_SCROLL_FACTOR = 0.4;
+
+  let titleImage = import.meta.env.VITE_TITLE_IMAGE_URL;
 
   let { name }: { name: string } = $props();
 
   let scrollPos = $state(0);
   let overlayOpacity = $derived(scrollPos / SCROLL_FULL);
   let overlayTransform = $derived(`translateY(${30 - overlayOpacity * 30}px)`);
-
-  $effect(() => {
-    console.log(overlayTransform);
-  });
 
   async function getParty(name: string): Promise<Party> {
     const response = await client.getParty({ name });
@@ -67,7 +64,7 @@
 {:then party}
   <div class="flex h-dvh w-dvw items-center justify-center overflow-hidden">
     <img
-      src={titleImg}
+      src={titleImage}
       alt="Titelbild"
       class="pointer-events-none h-auto w-full md:h-full md:w-auto"
     />
