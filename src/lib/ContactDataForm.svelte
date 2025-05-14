@@ -3,6 +3,8 @@
   import { BUTTON, INPUT } from '../../styles/element_styles';
   import { client } from './guest_client';
 
+  let confirmationImage = import.meta.env.VITE_CONFIRMATION_IMAGE_URL;
+
   let { party, close }: { party: Party; close: () => void } = $props();
 
   let street = $state(party.address?.street ?? '');
@@ -44,7 +46,17 @@
 </script>
 
 {#if closing}
-  <h1 class="mb-2 text-center text-lg text-orange-500">Abgeschickt!</h1>
+  <div class="flex flex-col items-center gap-2">
+    {#if confirmationImage}
+      <img
+        src={confirmationImage}
+        alt="Bild zur Bestätigung"
+        class="h-auto w-10/12 max-w-72"
+      />
+    {/if}
+    <h1 class="mt-2 text-xl text-orange-500">Abgeschickt</h1>
+    <p class="text-blue-500">Bis bald!</p>
+  </div>
 {:else}
   <form class="m-4 flex w-sm max-w-full flex-col gap-4" onsubmit={save}>
     <h1 class="mb-2 text-center text-2xl text-orange-500">
