@@ -5,7 +5,7 @@
   import titleImg from '../../assets/title.png';
 
   const SCROLL_FULL = 200;
-  const TOUCH_SCROLL_FACTOR = 0.1;
+  const TOUCH_SCROLL_FACTOR = 0.4;
 
   let { name }: { name: string } = $props();
 
