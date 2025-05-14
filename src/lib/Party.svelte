@@ -1,15 +1,21 @@
 <script lang="ts">
-  import type { Party } from '../../../../gen/guest/v1/guest_pb';
+  import type { Party } from '../../gen/guest/v1/guest_pb';
   import ContactDataForm from './ContactDataForm.svelte';
   import { client } from './guest_client';
   import titleImg from '../../assets/title.png';
 
   const SCROLL_FULL = 200;
+  const TOUCH_SCROLL_FACTOR = 0.1;
 
   let { name }: { name: string } = $props();
 
-  let wheelPos = $state(0);
-  let overlayOpacity = $derived(wheelPos / SCROLL_FULL);
+  let scrollPos = $state(0);
+  let overlayOpacity = $derived(scrollPos / SCROLL_FULL);
+  let overlayTransform = $derived(`translateY(${30 - overlayOpacity * 30}px)`);
+
+  $effect(() => {
+    console.log(overlayTransform);
+  });
 
   async function getParty(name: string): Promise<Party> {
     const response = await client.getParty({ name });
@@ -21,18 +27,45 @@
   }
 
   function closeForm() {
-    wheelPos = 0;
+    scrollPos = 0;
   }
 
-  document.addEventListener('wheel', (event) => {
-    wheelPos = Math.min(SCROLL_FULL, Math.max(0, wheelPos + event.deltaY));
-  });
+  function addScroll(delta: number) {
+    scrollPos = Math.min(SCROLL_FULL, Math.max(0, scrollPos + delta));
+  }
+
+  document.addEventListener(
+    'wheel',
+    (event) => {
+      addScroll(event.deltaY);
+    },
+    { passive: true },
+  );
+
+  let touchStartY: number | undefined;
+  document.addEventListener(
+    'touchstart',
+    (event) => {
+      touchStartY = event.touches[0].pageY;
+    },
+    { passive: true },
+  );
+  document.addEventListener(
+    'touchmove',
+    (event) => {
+      if (touchStartY === undefined) return;
+      const y = event.touches[0].pageY;
+      const delta = touchStartY - y;
+      addScroll(delta * TOUCH_SCROLL_FACTOR);
+    },
+    { passive: true },
+  );
 </script>
 
 {#await getParty(name)}
   Gäste werden geladen...
 {:then party}
-  <div class="flex h-screen w-screen items-center justify-center">
+  <div class="flex h-dvh w-dvw items-center justify-center overflow-hidden">
     <img
       src={titleImg}
       alt="Titelbild"
@@ -46,7 +79,11 @@
       style:opacity={overlayOpacity}
     >
       <div class="bg-beige-500 absolute inset-0 z-10 opacity-80"></div>
-      <div class="absolute inset-0 z-20 mx-2 flex items-center justify-center">
+      <div
+        class="absolute inset-0 z-20 mx-2 flex items-center justify-center"
+        style:transform={overlayTransform}
+        style:opacity={overlayOpacity}
+      >
         <ContactDataForm {party} close={closeForm}></ContactDataForm>
       </div>
     </div>

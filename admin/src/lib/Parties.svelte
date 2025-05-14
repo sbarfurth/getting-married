@@ -83,7 +83,8 @@
   }
 
   function generateLink(party: Party): string {
-    return `https://sarah-und-sebastian-hochzeit.de/?p=${party.name}`;
+    const url = new URL(`${document.location.origin}?p=${party.name}`);
+    return url.toString();
   }
 
   async function copyLink(party: Party): Promise<void> {
