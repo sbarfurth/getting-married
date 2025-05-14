@@ -230,6 +230,9 @@
             {#each party.guests as guest}
               <li>{guest.firstName} {guest.lastName}</li>
             {/each}
+            {#if party.guests.length < party.maxGuests}
+              <li>(+{party.maxGuests - party.guests.length})</li>
+            {/if}
           </ul>
           <button onclick={() => copyLink(party)} class={BUTTON}
             ><span class="material-symbols-outlined">content_copy</span></button
