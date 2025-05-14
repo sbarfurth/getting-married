@@ -11,11 +11,6 @@
   --color-yellow-500: oklch(0.91 0.1373 97.71);
 }
 
-:root {
-  overscroll-behavior: none;
-  overflow: hidden;
-}
-
 body {
   background: oklch(0.95 0.0258 29.42);
 }
