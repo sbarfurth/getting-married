@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-adlam: 'ADLaM Display', sans-serif;
+  --font-league-spartan: 'League Spartan', sans-serif;
 
   --color-beige-500: oklch(0.95 0.0258 29.42);
   --color-orange-500: oklch(0.68 0.2128 40.32);
