@@ -98,7 +98,7 @@
       `Hallo ${formatNames(party)}!`,
       '',
       'Wir heiraten und freuen uns, unser Save the Date zu teilen.',
-      `Mehr Infos gibt es unter dem Link: ${generateLink(party)}`,
+      `Mehr Infos gibt es unter dem Link.`,
       '',
       'Liebe Grüße,',
       'Sarah und Sebastian',
