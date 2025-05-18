@@ -94,26 +94,23 @@
   }
 
   function copyMessage(party: Party): Promise<void> {
-    return copyText(`Hallo ${formatNames(party)}!
-
-Wir heiraten und freuen uns, unser Save the Date zu teilen.
-Mehr Infos gibt es unter dem Link: ${generateLink(party)}
-
-Liebe Grüße,
-Sarah und Sebastian`);
+    return copyText([
+      `Hallo ${formatNames(party)}!`,
+      '',
+      'Wir heiraten und freuen uns, unser Save the Date zu teilen.',
+      `Mehr Infos gibt es unter dem Link: ${generateLink(party)}`,
+      '',
+      'Liebe Grüße,',
+      'Sarah und Sebastian',
+    ]);
   }
 
   function copyLink(party: Party): Promise<void> {
-    return copyText(generateLink(party));
+    return copyText([generateLink(party)]);
   }
 
-  async function copyText(text: string): Promise<void> {
-    const type = 'text/plain';
-    const clipboardItemData = {
-      [type]: text,
-    };
-    const clipboardItem = new ClipboardItem(clipboardItemData);
-    await navigator.clipboard.write([clipboardItem]);
+  async function copyText(lines: string[]): Promise<void> {
+    await navigator.clipboard.writeText(lines.join('\r\n'));
     alert('Kopiert!');
   }
 
@@ -305,6 +302,8 @@ Sarah und Sebastian`);
             <button onclick={() => copyMessage(party)} class={BUTTON}
               >Nachricht kopieren</button
             >
+          </div>
+          <div class="flex gap-2">
             <button onclick={() => editParty(party)} class={BUTTON}
               >Bearbeiten</button
             >
