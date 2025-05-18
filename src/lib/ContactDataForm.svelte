@@ -51,7 +51,7 @@
       <img
         src={confirmationImage}
         alt="Bild zur Bestätigung"
-        class="h-auto w-10/12 max-w-72"
+        class="h-auto w-10/12 max-w-80"
       />
     {/if}
     <h1 class="mt-2 text-xl text-orange-500">Abgeschickt</h1>
