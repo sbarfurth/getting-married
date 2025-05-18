@@ -110,13 +110,13 @@
       style:opacity={reverseOverlayOpacity}
     >
       <button
-        class="flex cursor-pointer items-center rounded-lg border-2 border-pink-500 bg-blue-500 px-2 py-1 text-xs font-normal text-white shadow-lg/40"
+        class="bg-beige-500 flex cursor-pointer items-center rounded-lg border-2 border-orange-500 px-2 py-1 text-xs font-normal text-orange-500 shadow-md/20"
         onclick={openForm}
       >
         Kontaktdaten für die Einladung eingeben
-        <span class="ml-4 animate-bounce">
+        <span class="ml-2 animate-bounce">
           <i
-            class="inline-block rotate-45 border-r-2 border-b-2 border-white p-1"
+            class="inline-block rotate-45 border-r border-b border-current p-0.5"
           ></i>
         </span>
       </button>

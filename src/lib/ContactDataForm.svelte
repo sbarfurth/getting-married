@@ -62,7 +62,7 @@
     <h1 class="mb-2 text-center text-2xl text-orange-500">
       Kontaktdaten für die Einladung
     </h1>
-    <div class="mb-4 text-center font-semibold text-orange-600">
+    <div class="mb-4 text-center font-semibold text-blue-500">
       {#each party.guests as guest}
         <p>{guest.firstName} {guest.lastName}</p>
       {/each}
