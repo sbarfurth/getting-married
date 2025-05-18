@@ -60,14 +60,14 @@
 {:else}
   <form class="m-4 flex w-sm max-w-full flex-col gap-4" onsubmit={save}>
     <h1 class="mb-2 text-center text-2xl text-orange-500">
-      Lasst eure Daten für die Einladung da!
+      Kontaktdaten für die Einladung
     </h1>
     <div class="mb-4 text-center font-semibold text-orange-600">
       {#each party.guests as guest}
         <p>{guest.firstName} {guest.lastName}</p>
       {/each}
       {#if party.guests.length < party.maxGuests}
-        <p>(+{party.maxGuests - party.guests.length})</p>
+        <p class="font-normal">+{party.maxGuests - party.guests.length}</p>
       {/if}
     </div>
     <div>

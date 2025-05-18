@@ -76,6 +76,9 @@
   }
 
   async function deleteParty(party: Party): Promise<void> {
+    if (!confirm(`Willst du die Partei ${party.name} wirklich löschen?`)) {
+      return;
+    }
     await client.deleteParty({
       name: party.name,
     });
@@ -224,7 +227,7 @@
   {:then parties}
     <div class="m-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {#each parties as party}
-        <div class="flex flex-col gap-2 rounded border-1 border-gray-400 p-2">
+        <div class="flex flex-col gap-2 rounded border-2 border-pink-500 p-2">
           <div>
             <h3 class="text-xl font-bold">{party.displayName}</h3>
             <p class="text-sm font-normal text-gray-500">{party.name}</p>
