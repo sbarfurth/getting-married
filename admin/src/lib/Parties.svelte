@@ -94,7 +94,7 @@
   }
 
   function copyMessage(party: Party): Promise<void> {
-    return copyText(`Hallo ${formatNames(party)},
+    return copyText(`Hallo ${formatNames(party)}!
 
 Wir heiraten und freuen uns, unser Save the Date zu teilen.
 Mehr Infos gibt es unter dem Link: ${generateLink(party)}
