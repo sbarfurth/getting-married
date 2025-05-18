@@ -120,7 +120,7 @@
     }
     const commaGuests = party.guests.slice(0, -1);
     const andGuest = party.guests[party.guests.length - 1];
-    return `${commaGuests.join(', ')} und ${andGuest}`;
+    return `${commaGuests.map((g) => g.firstName).join(', ')} und ${andGuest.firstName}`;
   }
 </script>
 
