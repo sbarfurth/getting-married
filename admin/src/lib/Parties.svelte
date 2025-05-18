@@ -93,14 +93,37 @@
     return url.toString();
   }
 
-  async function copyLink(party: Party): Promise<void> {
+  function copyMessage(party: Party): Promise<void> {
+    return copyText(`Hallo ${formatNames(party)},
+
+Wir heiraten und freuen uns, unser Save the Date zu teilen.
+Mehr Infos gibt es unter dem Link: ${generateLink(party)}
+
+Liebe Grüße,
+Sarah und Sebastian`);
+  }
+
+  function copyLink(party: Party): Promise<void> {
+    return copyText(generateLink(party));
+  }
+
+  async function copyText(text: string): Promise<void> {
     const type = 'text/plain';
     const clipboardItemData = {
-      [type]: generateLink(party),
+      [type]: text,
     };
     const clipboardItem = new ClipboardItem(clipboardItemData);
     await navigator.clipboard.write([clipboardItem]);
-    alert('Link kopiert!');
+    alert('Kopiert!');
+  }
+
+  function formatNames(party: Party): string {
+    if (party.guests.length === 1) {
+      return party.guests[0].firstName;
+    }
+    const commaGuests = party.guests.slice(0, -1);
+    const andGuest = party.guests[party.guests.length - 1];
+    return `${commaGuests.join(', ')} und ${andGuest}`;
   }
 </script>
 
@@ -278,6 +301,9 @@
           <div class="flex gap-2">
             <button onclick={() => copyLink(party)} class={BUTTON}
               >Link kopieren</button
+            >
+            <button onclick={() => copyMessage(party)} class={BUTTON}
+              >Nachricht kopieren</button
             >
             <button onclick={() => editParty(party)} class={BUTTON}
               >Bearbeiten</button
