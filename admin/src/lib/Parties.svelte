@@ -97,6 +97,7 @@
     };
     const clipboardItem = new ClipboardItem(clipboardItemData);
     await navigator.clipboard.write([clipboardItem]);
+    alert('Link kopiert!');
   }
 </script>
 
@@ -223,9 +224,12 @@
   {:then parties}
     <div class="m-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {#each parties as party}
-        <div class="rounded border-1 border-gray-400 p-2">
-          <h3 class="text-xl font-bold">{party.displayName}</h3>
-          <p class="text-sm text-gray-500">{party.name}</p>
+        <div class="flex flex-col gap-2 rounded border-1 border-gray-400 p-2">
+          <div>
+            <h3 class="text-xl font-bold">{party.displayName}</h3>
+            <p class="text-sm font-normal text-gray-500">{party.name}</p>
+          </div>
+          <hr />
           <ul>
             {#each party.guests as guest}
               <li>{guest.firstName} {guest.lastName}</li>
@@ -234,15 +238,51 @@
               <li>(+{party.maxGuests - party.guests.length})</li>
             {/if}
           </ul>
-          <button onclick={() => copyLink(party)} class={BUTTON}
-            ><span class="material-symbols-outlined">content_copy</span></button
-          >
-          <button onclick={() => editParty(party)} class={BUTTON}
-            ><span class="material-symbols-outlined">edit</span></button
-          >
-          <button onclick={() => deleteParty(party)} class={BUTTON}
-            ><span class="material-symbols-outlined">delete</span></button
-          >
+          <hr />
+          <div>
+            <h4>Adresse</h4>
+            <p class="font-normal">
+              {#if party.address && party.address.street}
+                {party.address.street}, {party.address.postalCode}
+                {party.address.city}
+              {:else}
+                Keine Angabe.
+              {/if}
+            </p>
+          </div>
+          <hr />
+          <div>
+            <h4>E-Mail</h4>
+            <p class="font-normal">
+              {#if party.contact && party.contact.email}
+                {party.contact.email}
+              {:else}
+                Keine Angabe.
+              {/if}
+            </p>
+          </div>
+          <hr />
+          <div>
+            <h4>Telefon</h4>
+            <p class="font-normal">
+              {#if party.contact && party.contact.phone}
+                {party.contact.phone}
+              {:else}
+                Keine Angabe.
+              {/if}
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick={() => copyLink(party)} class={BUTTON}
+              >Link kopieren</button
+            >
+            <button onclick={() => editParty(party)} class={BUTTON}
+              >Bearbeiten</button
+            >
+            <button onclick={() => deleteParty(party)} class={BUTTON}
+              >Löschen</button
+            >
+          </div>
         </div>
       {:else}
         <p>Keine Parteien vorhanden.</p>
