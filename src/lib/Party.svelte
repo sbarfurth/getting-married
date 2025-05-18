@@ -12,6 +12,7 @@
 
   let scrollPos = $state(0);
   let overlayOpacity = $derived(scrollPos / SCROLL_FULL);
+  let reverseOverlayOpacity = $derived(1 - overlayOpacity);
   let overlayTransform = $derived(`translateY(${30 - overlayOpacity * 30}px)`);
 
   async function getParty(name: string): Promise<Party> {
@@ -24,7 +25,25 @@
   }
 
   function closeForm() {
-    scrollPos = 0;
+    scrollFormTo(0);
+  }
+
+  function openForm() {
+    scrollFormTo(SCROLL_FULL);
+  }
+
+  let scrollingForm = false;
+
+  function scrollFormTo(target: number) {
+    if (scrollingForm) return;
+    scrollingForm = true;
+    const openInterval = setInterval(() => {
+      addScroll(target > scrollPos ? 2 : -2);
+      if (scrollPos === target) {
+        clearInterval(openInterval);
+        scrollingForm = false;
+      }
+    }, 1);
   }
 
   function addScroll(delta: number) {
@@ -85,6 +104,24 @@
       </div>
     </div>
   </div>
+  {#if !party.address.street && overlayOpacity < 1}
+    <div
+      class="absolute inset-x-4 bottom-4 z-20 flex justify-center text-pink-500"
+      style:opacity={reverseOverlayOpacity}
+    >
+      <button
+        class="flex cursor-pointer items-center rounded-lg border-4 border-blue-500 bg-pink-500 px-4 py-2 text-yellow-500 shadow-xl/30"
+        onclick={openForm}
+      >
+        Kontaktdaten für die<br />Einladung eingeben
+        <span class="ml-4 animate-bounce">
+          <i
+            class="inline-block rotate-45 border-r-4 border-b-4 border-yellow-500 p-1"
+          ></i>
+        </span>
+      </button>
+    </div>
+  {/if}
 {:catch err}
   Gäste konnten nicht geladen werden: {err.message}
 {/await}
