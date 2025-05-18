@@ -110,7 +110,7 @@
       style:opacity={reverseOverlayOpacity}
     >
       <button
-        class="bg-beige-500 flex cursor-pointer items-center rounded-lg border-2 border-orange-500 px-2 py-1 text-xs font-normal text-orange-500 shadow-md/20"
+        class="bg-beige-500 flex cursor-pointer items-center rounded border border-orange-500 px-2 py-0.5 text-xs font-normal text-orange-500"
         onclick={openForm}
       >
         Kontaktdaten für die Einladung eingeben
