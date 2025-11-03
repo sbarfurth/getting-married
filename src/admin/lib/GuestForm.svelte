@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Guest } from '../../../../gen/guest/v1/guest_pb';
+  import type { Guest } from '../../../gen/guest/v1/guest_pb';
   import { INPUT, LABEL } from '../../../styles/element_styles';
 
   let { guest = $bindable() }: { guest: Guest } = $props();

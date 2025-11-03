@@ -9,7 +9,14 @@ option go_package = "getting-married/gen/guest/v1;guestv1";
 
 service GuestService {
   rpc GetParty(GetPartyRequest) returns (GetPartyResponse) {}
-  rpc UpdatePartyContactInfo(UpdatePartyContactInfoRequest) returns (UpdatePartyContactInfoResponse) {}
+  rpc UpdatePartyContactInfo(UpdatePartyContactInfoRequest)
+      returns (UpdatePartyContactInfoResponse) {}
+  rpc UpdatePartyRsvpResponse(UpdatePartyRsvpResponseRequest)
+      returns (UpdatePartyRsvpResponseResponse) {}
+  rpc UpdateGuestRsvp(UpdateGuestRsvpRequest)
+      returns (UpdateGuestRsvpResponse) {}
+  rpc AddGuest(AddGuestRequest) returns (AddGuestResponse) {}
+  rpc RemoveGuest(RemoveGuestRequest) returns (RemoveGuestResponse) {}
 
   // Admin only APIs.
   rpc ListParties(ListPartiesRequest) returns (ListPartiesResponse) {}
@@ -21,7 +28,6 @@ service GuestService {
 message GetPartyRequest {
   string name = 1;
 }
-
 message GetPartyResponse {
   Party party = 1;
 }
@@ -31,13 +37,45 @@ message UpdatePartyContactInfoRequest {
   Party.Address address = 2;
   Party.Contact contact = 3;
 }
-
 message UpdatePartyContactInfoResponse {
   Party party = 1;
 }
 
-message ListPartiesRequest {}
+message UpdatePartyRsvpResponseRequest {
+  string name = 1;
+  RSVP.Response response = 2;
+}
+message UpdatePartyRsvpResponseResponse {
+  Party party = 1;
+}
 
+message UpdateGuestRsvpRequest {
+  string name = 1;
+  int32 index = 2;
+  RSVP rsvp = 3;
+}
+message UpdateGuestRsvpResponse {
+  Party party = 1;
+}
+
+message AddGuestRequest {
+  string name = 1;
+  Guest guest = 2;
+}
+message AddGuestResponse {
+  Party party = 1;
+}
+
+message RemoveGuestRequest {
+  string name = 1;
+  int32 index = 2;
+}
+message RemoveGuestResponse {
+  Party party = 1;
+}
+
+// Admin APIs.
+message ListPartiesRequest {}
 message ListPartiesResponse {
   repeated Party parties = 1;
 }
@@ -45,7 +83,6 @@ message ListPartiesResponse {
 message CreatePartyRequest {
   Party party = 1;
 }
-
 message CreatePartyResponse {
   Party party = 1;
 }
@@ -53,7 +90,6 @@ message CreatePartyResponse {
 message UpdatePartyRequest {
   Party party = 1;
 }
-
 message UpdatePartyResponse {
   Party party = 1;
 }

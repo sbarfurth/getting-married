@@ -5,6 +5,7 @@ import (
 	"fmt"
 	guestv1 "getting-married/gen/guest/v1"
 	"net/http"
+	"slices"
 
 	"connectrpc.com/connect"
 	"github.com/boltdb/bolt"
@@ -65,33 +66,113 @@ func (s *Server) GetParty(ctx context.Context, req *connect.Request[guestv1.GetP
 }
 
 func (s *Server) UpdatePartyContactInfo(ctx context.Context, req *connect.Request[guestv1.UpdatePartyContactInfoRequest]) (*connect.Response[guestv1.UpdatePartyContactInfoResponse], error) {
-	var partyBytes []byte
-	var updatedParty *guestv1.Party
-	if err := s.boltDB.Update(func(tx *bolt.Tx) error {
-		b := tx.Bucket(bucketName)
-		partyBytes = b.Get([]byte(req.Msg.GetName()))
-		if partyBytes == nil {
-			return connect.NewError(connect.CodeNotFound, fmt.Errorf("party not found"))
-		}
-		party := &guestv1.Party{}
-		if err := proto.Unmarshal(partyBytes, party); err != nil {
-			return connect.NewError(connect.CodeDataLoss, err)
-		}
+	updatedParty, err := s.updateParty(req.Msg.GetName(), func(party *guestv1.Party) error {
 		party.Address = req.Msg.GetAddress()
 		party.Contact = req.Msg.GetContact()
-		updatedBytes, err := proto.Marshal(party)
-		if err != nil {
-			return connect.NewError(connect.CodeUnknown, err)
-		}
-		if err := b.Put([]byte(req.Msg.GetName()), updatedBytes); err != nil {
-			return connect.NewError(connect.CodeUnknown, err)
-		}
-		updatedParty = party
 		return nil
-	}); err != nil {
+	})
+	if err != nil {
 		return nil, err
 	}
 	res := connect.NewResponse(&guestv1.UpdatePartyContactInfoResponse{
+		Party: updatedParty,
+	})
+	res.Header().Set("Guest-Version", "v1")
+	return res, nil
+}
+
+func (s *Server) UpdatePartyRsvpResponse(ctx context.Context, req *connect.Request[guestv1.UpdatePartyRsvpResponseRequest]) (*connect.Response[guestv1.UpdatePartyRsvpResponseResponse], error) {
+	updatedParty, err := s.updateParty(req.Msg.GetName(), func(party *guestv1.Party) error {
+		now := timestamppb.Now()
+		for _, guest := range party.Guests {
+			if guest.GetRsvp() == nil {
+				guest.Rsvp = &guestv1.RSVP{
+					Response:  req.Msg.GetResponse(),
+					UpdatedAt: now,
+				}
+			} else {
+				guest.GetRsvp().Response = req.Msg.GetResponse()
+				guest.GetRsvp().UpdatedAt = now
+			}
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	res := connect.NewResponse(&guestv1.UpdatePartyRsvpResponseResponse{
+		Party: updatedParty,
+	})
+	res.Header().Set("Guest-Version", "v1")
+	return res, nil
+}
+
+func (s *Server) UpdateGuestRsvp(ctx context.Context, req *connect.Request[guestv1.UpdateGuestRsvpRequest]) (*connect.Response[guestv1.UpdateGuestRsvpResponse], error) {
+	updatedParty, err := s.updateParty(req.Msg.GetName(), func(party *guestv1.Party) error {
+		if int(req.Msg.GetIndex()) >= len(party.GetGuests()) {
+			return connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("unknown guest index"))
+		}
+		party.GetGuests()[req.Msg.GetIndex()].Rsvp = req.Msg.GetRsvp()
+		party.GetGuests()[req.Msg.GetIndex()].Rsvp.UpdatedAt = timestamppb.Now()
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	res := connect.NewResponse(&guestv1.UpdateGuestRsvpResponse{
+		Party: updatedParty,
+	})
+	res.Header().Set("Guest-Version", "v1")
+	return res, nil
+}
+
+func (s *Server) AddGuest(ctx context.Context, req *connect.Request[guestv1.AddGuestRequest]) (*connect.Response[guestv1.AddGuestResponse], error) {
+	updatedParty, err := s.updateParty(req.Msg.GetName(), func(party *guestv1.Party) error {
+		if !party.GetAllowGuestSelfService() {
+			return connect.NewError(connect.CodePermissionDenied, fmt.Errorf("guest self-service is not allowed"))
+		}
+		if int(party.GetMaxGuests()) <= len(party.GetGuests()) {
+			return connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("maximum number of guests (%d) reached", party.GetMaxGuests()))
+		}
+		party.Guests = append(party.GetGuests(), &guestv1.Guest{
+			FirstName: req.Msg.GetGuest().GetFirstName(),
+			LastName:  req.Msg.GetGuest().GetLastName(),
+			Rsvp: &guestv1.RSVP{
+				Response:  guestv1.RSVP_RESPONSE_ACCEPTED,
+				UpdatedAt: timestamppb.Now(),
+			},
+		})
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	res := connect.NewResponse(&guestv1.AddGuestResponse{
+		Party: updatedParty,
+	})
+	res.Header().Set("Guest-Version", "v1")
+	return res, nil
+}
+
+func (s *Server) RemoveGuest(ctx context.Context, req *connect.Request[guestv1.RemoveGuestRequest]) (*connect.Response[guestv1.RemoveGuestResponse], error) {
+	updatedParty, err := s.updateParty(req.Msg.GetName(), func(party *guestv1.Party) error {
+		if !party.GetAllowGuestSelfService() {
+			return connect.NewError(connect.CodePermissionDenied, fmt.Errorf("guest self-service is not allowed"))
+		}
+		idx := int(req.Msg.GetIndex())
+		if idx >= len(party.GetGuests()) {
+			return connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("specified index does not exist"))
+		}
+		if len(party.GetGuests()) <= 1 {
+			return connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("cannot remove last guest"))
+		}
+		party.Guests = slices.Delete(party.GetGuests(), idx, idx+1)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	res := connect.NewResponse(&guestv1.RemoveGuestResponse{
 		Party: updatedParty,
 	})
 	res.Header().Set("Guest-Version", "v1")
@@ -209,4 +290,37 @@ func (s *Server) DeleteParty(ctx context.Context, req *connect.Request[guestv1.D
 	res := connect.NewResponse(&emptypb.Empty{})
 	res.Header().Set("Guest-Version", "v1")
 	return res, nil
+}
+
+func (s *Server) updateParty(name string, updater func(*guestv1.Party) error) (*guestv1.Party, error) {
+	var partyBytes []byte
+	var updatedParty *guestv1.Party
+	if err := s.boltDB.Update(func(tx *bolt.Tx) error {
+		b := tx.Bucket(bucketName)
+		partyBytes = b.Get([]byte(name))
+		if partyBytes == nil {
+			return connect.NewError(connect.CodeNotFound, fmt.Errorf("party not found"))
+		}
+		party := &guestv1.Party{}
+		if err := proto.Unmarshal(partyBytes, party); err != nil {
+			return connect.NewError(connect.CodeDataLoss, err)
+		}
+		if err := updater(party); err != nil {
+			return err
+		}
+		party.UpdatedAt = timestamppb.Now()
+		updatedBytes, err := proto.Marshal(party)
+		if err != nil {
+			return connect.NewError(connect.CodeUnknown, err)
+		}
+		if err := b.Put([]byte(name), updatedBytes); err != nil {
+			return connect.NewError(connect.CodeUnknown, err)
+		}
+		updatedParty = party
+		return nil
+	}); err != nil {
+		return nil, err
+	}
+	return updatedParty, nil
+
 }

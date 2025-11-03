@@ -39,6 +39,17 @@ const (
 	// GuestServiceUpdatePartyContactInfoProcedure is the fully-qualified name of the GuestService's
 	// UpdatePartyContactInfo RPC.
 	GuestServiceUpdatePartyContactInfoProcedure = "/guest.v1.GuestService/UpdatePartyContactInfo"
+	// GuestServiceUpdatePartyRsvpResponseProcedure is the fully-qualified name of the GuestService's
+	// UpdatePartyRsvpResponse RPC.
+	GuestServiceUpdatePartyRsvpResponseProcedure = "/guest.v1.GuestService/UpdatePartyRsvpResponse"
+	// GuestServiceUpdateGuestRsvpProcedure is the fully-qualified name of the GuestService's
+	// UpdateGuestRsvp RPC.
+	GuestServiceUpdateGuestRsvpProcedure = "/guest.v1.GuestService/UpdateGuestRsvp"
+	// GuestServiceAddGuestProcedure is the fully-qualified name of the GuestService's AddGuest RPC.
+	GuestServiceAddGuestProcedure = "/guest.v1.GuestService/AddGuest"
+	// GuestServiceRemoveGuestProcedure is the fully-qualified name of the GuestService's RemoveGuest
+	// RPC.
+	GuestServiceRemoveGuestProcedure = "/guest.v1.GuestService/RemoveGuest"
 	// GuestServiceListPartiesProcedure is the fully-qualified name of the GuestService's ListParties
 	// RPC.
 	GuestServiceListPartiesProcedure = "/guest.v1.GuestService/ListParties"
@@ -57,6 +68,10 @@ const (
 type GuestServiceClient interface {
 	GetParty(context.Context, *connect.Request[v1.GetPartyRequest]) (*connect.Response[v1.GetPartyResponse], error)
 	UpdatePartyContactInfo(context.Context, *connect.Request[v1.UpdatePartyContactInfoRequest]) (*connect.Response[v1.UpdatePartyContactInfoResponse], error)
+	UpdatePartyRsvpResponse(context.Context, *connect.Request[v1.UpdatePartyRsvpResponseRequest]) (*connect.Response[v1.UpdatePartyRsvpResponseResponse], error)
+	UpdateGuestRsvp(context.Context, *connect.Request[v1.UpdateGuestRsvpRequest]) (*connect.Response[v1.UpdateGuestRsvpResponse], error)
+	AddGuest(context.Context, *connect.Request[v1.AddGuestRequest]) (*connect.Response[v1.AddGuestResponse], error)
+	RemoveGuest(context.Context, *connect.Request[v1.RemoveGuestRequest]) (*connect.Response[v1.RemoveGuestResponse], error)
 	// Admin only APIs.
 	ListParties(context.Context, *connect.Request[v1.ListPartiesRequest]) (*connect.Response[v1.ListPartiesResponse], error)
 	CreateParty(context.Context, *connect.Request[v1.CreatePartyRequest]) (*connect.Response[v1.CreatePartyResponse], error)
@@ -85,6 +100,30 @@ func NewGuestServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			httpClient,
 			baseURL+GuestServiceUpdatePartyContactInfoProcedure,
 			connect.WithSchema(guestServiceMethods.ByName("UpdatePartyContactInfo")),
+			connect.WithClientOptions(opts...),
+		),
+		updatePartyRsvpResponse: connect.NewClient[v1.UpdatePartyRsvpResponseRequest, v1.UpdatePartyRsvpResponseResponse](
+			httpClient,
+			baseURL+GuestServiceUpdatePartyRsvpResponseProcedure,
+			connect.WithSchema(guestServiceMethods.ByName("UpdatePartyRsvpResponse")),
+			connect.WithClientOptions(opts...),
+		),
+		updateGuestRsvp: connect.NewClient[v1.UpdateGuestRsvpRequest, v1.UpdateGuestRsvpResponse](
+			httpClient,
+			baseURL+GuestServiceUpdateGuestRsvpProcedure,
+			connect.WithSchema(guestServiceMethods.ByName("UpdateGuestRsvp")),
+			connect.WithClientOptions(opts...),
+		),
+		addGuest: connect.NewClient[v1.AddGuestRequest, v1.AddGuestResponse](
+			httpClient,
+			baseURL+GuestServiceAddGuestProcedure,
+			connect.WithSchema(guestServiceMethods.ByName("AddGuest")),
+			connect.WithClientOptions(opts...),
+		),
+		removeGuest: connect.NewClient[v1.RemoveGuestRequest, v1.RemoveGuestResponse](
+			httpClient,
+			baseURL+GuestServiceRemoveGuestProcedure,
+			connect.WithSchema(guestServiceMethods.ByName("RemoveGuest")),
 			connect.WithClientOptions(opts...),
 		),
 		listParties: connect.NewClient[v1.ListPartiesRequest, v1.ListPartiesResponse](
@@ -116,12 +155,16 @@ func NewGuestServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 
 // guestServiceClient implements GuestServiceClient.
 type guestServiceClient struct {
-	getParty               *connect.Client[v1.GetPartyRequest, v1.GetPartyResponse]
-	updatePartyContactInfo *connect.Client[v1.UpdatePartyContactInfoRequest, v1.UpdatePartyContactInfoResponse]
-	listParties            *connect.Client[v1.ListPartiesRequest, v1.ListPartiesResponse]
-	createParty            *connect.Client[v1.CreatePartyRequest, v1.CreatePartyResponse]
-	updateParty            *connect.Client[v1.UpdatePartyRequest, v1.UpdatePartyResponse]
-	deleteParty            *connect.Client[v1.DeletePartyRequest, emptypb.Empty]
+	getParty                *connect.Client[v1.GetPartyRequest, v1.GetPartyResponse]
+	updatePartyContactInfo  *connect.Client[v1.UpdatePartyContactInfoRequest, v1.UpdatePartyContactInfoResponse]
+	updatePartyRsvpResponse *connect.Client[v1.UpdatePartyRsvpResponseRequest, v1.UpdatePartyRsvpResponseResponse]
+	updateGuestRsvp         *connect.Client[v1.UpdateGuestRsvpRequest, v1.UpdateGuestRsvpResponse]
+	addGuest                *connect.Client[v1.AddGuestRequest, v1.AddGuestResponse]
+	removeGuest             *connect.Client[v1.RemoveGuestRequest, v1.RemoveGuestResponse]
+	listParties             *connect.Client[v1.ListPartiesRequest, v1.ListPartiesResponse]
+	createParty             *connect.Client[v1.CreatePartyRequest, v1.CreatePartyResponse]
+	updateParty             *connect.Client[v1.UpdatePartyRequest, v1.UpdatePartyResponse]
+	deleteParty             *connect.Client[v1.DeletePartyRequest, emptypb.Empty]
 }
 
 // GetParty calls guest.v1.GuestService.GetParty.
@@ -132,6 +175,26 @@ func (c *guestServiceClient) GetParty(ctx context.Context, req *connect.Request[
 // UpdatePartyContactInfo calls guest.v1.GuestService.UpdatePartyContactInfo.
 func (c *guestServiceClient) UpdatePartyContactInfo(ctx context.Context, req *connect.Request[v1.UpdatePartyContactInfoRequest]) (*connect.Response[v1.UpdatePartyContactInfoResponse], error) {
 	return c.updatePartyContactInfo.CallUnary(ctx, req)
+}
+
+// UpdatePartyRsvpResponse calls guest.v1.GuestService.UpdatePartyRsvpResponse.
+func (c *guestServiceClient) UpdatePartyRsvpResponse(ctx context.Context, req *connect.Request[v1.UpdatePartyRsvpResponseRequest]) (*connect.Response[v1.UpdatePartyRsvpResponseResponse], error) {
+	return c.updatePartyRsvpResponse.CallUnary(ctx, req)
+}
+
+// UpdateGuestRsvp calls guest.v1.GuestService.UpdateGuestRsvp.
+func (c *guestServiceClient) UpdateGuestRsvp(ctx context.Context, req *connect.Request[v1.UpdateGuestRsvpRequest]) (*connect.Response[v1.UpdateGuestRsvpResponse], error) {
+	return c.updateGuestRsvp.CallUnary(ctx, req)
+}
+
+// AddGuest calls guest.v1.GuestService.AddGuest.
+func (c *guestServiceClient) AddGuest(ctx context.Context, req *connect.Request[v1.AddGuestRequest]) (*connect.Response[v1.AddGuestResponse], error) {
+	return c.addGuest.CallUnary(ctx, req)
+}
+
+// RemoveGuest calls guest.v1.GuestService.RemoveGuest.
+func (c *guestServiceClient) RemoveGuest(ctx context.Context, req *connect.Request[v1.RemoveGuestRequest]) (*connect.Response[v1.RemoveGuestResponse], error) {
+	return c.removeGuest.CallUnary(ctx, req)
 }
 
 // ListParties calls guest.v1.GuestService.ListParties.
@@ -158,6 +221,10 @@ func (c *guestServiceClient) DeleteParty(ctx context.Context, req *connect.Reque
 type GuestServiceHandler interface {
 	GetParty(context.Context, *connect.Request[v1.GetPartyRequest]) (*connect.Response[v1.GetPartyResponse], error)
 	UpdatePartyContactInfo(context.Context, *connect.Request[v1.UpdatePartyContactInfoRequest]) (*connect.Response[v1.UpdatePartyContactInfoResponse], error)
+	UpdatePartyRsvpResponse(context.Context, *connect.Request[v1.UpdatePartyRsvpResponseRequest]) (*connect.Response[v1.UpdatePartyRsvpResponseResponse], error)
+	UpdateGuestRsvp(context.Context, *connect.Request[v1.UpdateGuestRsvpRequest]) (*connect.Response[v1.UpdateGuestRsvpResponse], error)
+	AddGuest(context.Context, *connect.Request[v1.AddGuestRequest]) (*connect.Response[v1.AddGuestResponse], error)
+	RemoveGuest(context.Context, *connect.Request[v1.RemoveGuestRequest]) (*connect.Response[v1.RemoveGuestResponse], error)
 	// Admin only APIs.
 	ListParties(context.Context, *connect.Request[v1.ListPartiesRequest]) (*connect.Response[v1.ListPartiesResponse], error)
 	CreateParty(context.Context, *connect.Request[v1.CreatePartyRequest]) (*connect.Response[v1.CreatePartyResponse], error)
@@ -182,6 +249,30 @@ func NewGuestServiceHandler(svc GuestServiceHandler, opts ...connect.HandlerOpti
 		GuestServiceUpdatePartyContactInfoProcedure,
 		svc.UpdatePartyContactInfo,
 		connect.WithSchema(guestServiceMethods.ByName("UpdatePartyContactInfo")),
+		connect.WithHandlerOptions(opts...),
+	)
+	guestServiceUpdatePartyRsvpResponseHandler := connect.NewUnaryHandler(
+		GuestServiceUpdatePartyRsvpResponseProcedure,
+		svc.UpdatePartyRsvpResponse,
+		connect.WithSchema(guestServiceMethods.ByName("UpdatePartyRsvpResponse")),
+		connect.WithHandlerOptions(opts...),
+	)
+	guestServiceUpdateGuestRsvpHandler := connect.NewUnaryHandler(
+		GuestServiceUpdateGuestRsvpProcedure,
+		svc.UpdateGuestRsvp,
+		connect.WithSchema(guestServiceMethods.ByName("UpdateGuestRsvp")),
+		connect.WithHandlerOptions(opts...),
+	)
+	guestServiceAddGuestHandler := connect.NewUnaryHandler(
+		GuestServiceAddGuestProcedure,
+		svc.AddGuest,
+		connect.WithSchema(guestServiceMethods.ByName("AddGuest")),
+		connect.WithHandlerOptions(opts...),
+	)
+	guestServiceRemoveGuestHandler := connect.NewUnaryHandler(
+		GuestServiceRemoveGuestProcedure,
+		svc.RemoveGuest,
+		connect.WithSchema(guestServiceMethods.ByName("RemoveGuest")),
 		connect.WithHandlerOptions(opts...),
 	)
 	guestServiceListPartiesHandler := connect.NewUnaryHandler(
@@ -214,6 +305,14 @@ func NewGuestServiceHandler(svc GuestServiceHandler, opts ...connect.HandlerOpti
 			guestServiceGetPartyHandler.ServeHTTP(w, r)
 		case GuestServiceUpdatePartyContactInfoProcedure:
 			guestServiceUpdatePartyContactInfoHandler.ServeHTTP(w, r)
+		case GuestServiceUpdatePartyRsvpResponseProcedure:
+			guestServiceUpdatePartyRsvpResponseHandler.ServeHTTP(w, r)
+		case GuestServiceUpdateGuestRsvpProcedure:
+			guestServiceUpdateGuestRsvpHandler.ServeHTTP(w, r)
+		case GuestServiceAddGuestProcedure:
+			guestServiceAddGuestHandler.ServeHTTP(w, r)
+		case GuestServiceRemoveGuestProcedure:
+			guestServiceRemoveGuestHandler.ServeHTTP(w, r)
 		case GuestServiceListPartiesProcedure:
 			guestServiceListPartiesHandler.ServeHTTP(w, r)
 		case GuestServiceCreatePartyProcedure:
@@ -237,6 +336,22 @@ func (UnimplementedGuestServiceHandler) GetParty(context.Context, *connect.Reque
 
 func (UnimplementedGuestServiceHandler) UpdatePartyContactInfo(context.Context, *connect.Request[v1.UpdatePartyContactInfoRequest]) (*connect.Response[v1.UpdatePartyContactInfoResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("guest.v1.GuestService.UpdatePartyContactInfo is not implemented"))
+}
+
+func (UnimplementedGuestServiceHandler) UpdatePartyRsvpResponse(context.Context, *connect.Request[v1.UpdatePartyRsvpResponseRequest]) (*connect.Response[v1.UpdatePartyRsvpResponseResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("guest.v1.GuestService.UpdatePartyRsvpResponse is not implemented"))
+}
+
+func (UnimplementedGuestServiceHandler) UpdateGuestRsvp(context.Context, *connect.Request[v1.UpdateGuestRsvpRequest]) (*connect.Response[v1.UpdateGuestRsvpResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("guest.v1.GuestService.UpdateGuestRsvp is not implemented"))
+}
+
+func (UnimplementedGuestServiceHandler) AddGuest(context.Context, *connect.Request[v1.AddGuestRequest]) (*connect.Response[v1.AddGuestResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("guest.v1.GuestService.AddGuest is not implemented"))
+}
+
+func (UnimplementedGuestServiceHandler) RemoveGuest(context.Context, *connect.Request[v1.RemoveGuestRequest]) (*connect.Response[v1.RemoveGuestResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("guest.v1.GuestService.RemoveGuest is not implemented"))
 }
 
 func (UnimplementedGuestServiceHandler) ListParties(context.Context, *connect.Request[v1.ListPartiesRequest]) (*connect.Response[v1.ListPartiesResponse], error) {

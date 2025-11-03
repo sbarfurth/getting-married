@@ -2,6 +2,7 @@
 
 @theme {
   --font-league-spartan: 'League Spartan', sans-serif;
+  --font-fontoon: 'Fontoon', sans-serif;
 
   --color-beige-500: oklch(0.95 0.0258 29.42);
   --color-orange-500: oklch(0.68 0.2128 40.32);
@@ -11,6 +12,19 @@
   --color-yellow-500: oklch(0.91 0.1373 97.71);
 }
 
-body {
-  background: oklch(0.95 0.0258 29.42);
+@layer base {
+  .material-symbols-outlined {
+    font-size: inherit !important;
+  }
+}
+
+@font-face {
+  font-family: "Fontoon";
+  src:
+    local("Fontoon"),
+    url("../static/fontoon_regular.woff2") format("woff2"),
+}
+
+::backdrop {
+  background: rgba(0, 0, 0, 0.7);
 }

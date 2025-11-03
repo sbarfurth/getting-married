@@ -40,6 +40,8 @@ message Party {
 
   repeated Guest guests = 3;
 
+  bool allow_guest_self_service = 8;
+
   // Maximum number of guests in this party.
   int32 max_guests = 4;
 
