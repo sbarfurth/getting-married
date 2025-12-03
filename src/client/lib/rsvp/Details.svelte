@@ -191,7 +191,7 @@
           </p>
           <div class="mt-2">
             <a href="https://paypal.com" target="_blank" class="underline"
-              >Zu PayPal</a
+              >Zu PayPal (Link folgt!)</a
             >
             <p>IBAN: DE50 5001 0517 5429 5063 95</p>
           </div>
