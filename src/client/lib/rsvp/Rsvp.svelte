@@ -46,7 +46,7 @@
 
 <dialog
   id="wedding-detail-dialog"
-  class="bg-beige-500 m-auto h-full w-full overflow-hidden rounded-lg border-2 border-blue-500 lg:h-6/12 lg:w-2/3"
+  class="bg-beige-500 m-auto h-full w-full overflow-hidden rounded-lg border-2 border-blue-500 lg:min-h-6/12 lg:w-2/3"
 >
   <div class="flex h-full flex-col">
     <Details

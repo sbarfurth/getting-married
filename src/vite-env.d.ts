@@ -8,6 +8,8 @@ interface ImportMetaEnv {
   readonly VITE_TITLE_IMAGE_URL: string;
   readonly VITE_PREVIEW_IMAGE_URL: string;
   readonly VITE_CONFIRMATION_IMAGE_URL: string;
+  readonly VITE_YEARS_IMAGES_BASE_URL: string;
+  readonly VITE_YEARS_IMAGES_EXT: string;
 }
 
 interface ImportMeta {

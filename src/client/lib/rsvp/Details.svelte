@@ -6,6 +6,19 @@
 
   let activeTab = $state<'party' | 'innerCircle' | 'about'>('party');
 
+  const YEARS = [
+    '2016',
+    '2017',
+    '2018',
+    '2019',
+    '2020',
+    '2021',
+    '2022',
+    '2023',
+    '2024',
+    '2025',
+  ];
+
   const tabs: { [key in typeof activeTab]: string } = $derived({
     party: 'Hochzeits&shy;feier',
     innerCircle: showInnerCircle ? 'Standes&shy;amt' : '',
@@ -247,6 +260,46 @@
           <p>Anschließend gehen wir als Gruppe gemeinsam zum Mittagessen.</p>
           <p class="text-sm italic">Das Restaurant steht noch nicht fest.</p>
         </div>
+      </div>
+    </div>
+  {:else if activeTab === 'about'}
+    <div class="flex flex-col gap-4 text-blue-500">
+      <h3 class="text-xl font-bold text-pink-500">10 Jahre später...</h3>
+      <p>Obwohl ihr uns ja alle kennt hier nochmal ein Mini-Rückblick:</p>
+      <p>
+        Wir haben uns 2016 während des Abiturs in Stade am Athenaeum
+        kennengelernt. Wir sind also quasi so eine "Schulromanze" wie aus
+        billigen Liebesfilmen - aber halt in echt. Nach dem Abitur ging
+        Sebastian für sein Studium nach Stuttgart und Sarah machte ein Jahr als
+        Au-Pair in London. Ein Jahr Fernbeziehung haben wir aber auch
+        überstanden. Danach kam Sarah auch nach Stuttgart zum Studieren. Seitdem
+        wohnen wir gemeinsam - zunächst in Stuttgart (und Umgebung), und seit
+        2022 in München.
+      </p>
+      <p>
+        Nach fast genau 10 Jahren wollen wir jetzt dann (endlich) heiraten.
+        Damit die passende Stimmung aufkommt, hier noch ein paar Eindrücke aus
+        den Jahren die hierher geführt haben.
+      </p>
+      <p>
+        Wir freuen uns auf euch,<br />
+        <span class="text-pink-500">Sarah & Sebastian</span>
+      </p>
+      <div class="grid gap-4 lg:grid-cols-2">
+        {#each YEARS as year}
+          <div>
+            <h3 class="text-xl font-bold text-pink-500">
+              {year}
+            </h3>
+            <img
+              src="{import.meta.env
+                .VITE_YEARS_IMAGES_BASE_URL}{year}.{import.meta.env
+                .VITE_YEARS_IMAGES_EXT}"
+              alt="Bild aus dem Jahr {year}"
+              class="w-full rounded-lg border-2 border-blue-500"
+            />
+          </div>
+        {/each}
       </div>
     </div>
   {/if}
