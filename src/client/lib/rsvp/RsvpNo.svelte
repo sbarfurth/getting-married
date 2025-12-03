@@ -4,7 +4,13 @@
   import { client } from '../guest_client';
   import Button from './Button.svelte';
 
-  let { party = $bindable() }: { party: Party } = $props();
+  let {
+    party = $bindable(),
+    openDetails,
+  }: {
+    party: Party;
+    openDetails: () => void;
+  } = $props();
 
   async function switchResponseToYes() {
     const updateResponse = await client.updatePartyRsvpResponse({
@@ -17,17 +23,25 @@
   }
 </script>
 
-<div class="font-fontoon flex h-screen w-screen items-center justify-center">
-  <h1 class="max-w-1/2 text-center text-5xl leading-relaxed text-pink-500">
+<div
+  class="font-fontoon flex h-screen w-screen flex-col items-center justify-center gap-4 p-2"
+>
+  <h1
+    class="text-center text-3xl leading-relaxed text-pink-500 lg:max-w-1/3 lg:text-5xl"
+  >
     Schade, dass {party.guests.length > 1
       ? 'ihr nicht kommt'
       : 'du nicht kommst'}
     {formatNames(party)} :(
   </h1>
-</div>
-
-<div class="absolute bottom-4 left-4">
-  <Button onclick={() => switchResponseToYes()} color="pink"
-    >{party.guests.length > 1 ? 'Wir können' : 'Ich kann'} doch kommen</Button
+  <div class="flex gap-2">
+    <Button onclick={() => openDetails()} size="small"
+      >Weitere Informationen</Button
+    >
+  </div>
+  <button
+    class="cursor-pointer text-sm text-pink-500 underline"
+    onclick={() => switchResponseToYes()}
+    >{party.guests.length > 1 ? 'Wir können' : 'Ich kann'} doch kommen</button
   >
 </div>

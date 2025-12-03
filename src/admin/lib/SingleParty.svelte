@@ -142,6 +142,17 @@
     </p>
   </div>
   <hr />
+  <div class="grid grid-cols-[auto_1fr] gap-2">
+    <label for="{party.name}-inner-circle">Standesamt</label>
+    <p class="font-normal" id="{party.name}-inner-circle">
+      {#if party.innerCircle}
+        Ja
+      {:else}
+        Nein
+      {/if}
+    </p>
+  </div>
+  <hr />
   <div class="flex gap-2">
     <button onclick={() => copyLink(party)} class={BUTTON}>Link kopieren</button
     >

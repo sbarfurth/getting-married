@@ -164,11 +164,13 @@
             onclick={() => togglePartySelected(party)}
           >
             <span>{party.displayName}</span>
-            <span
-              >({party.guests.filter(
-                (guest) => guest.rsvp?.response === RSVP_Response.ACCEPTED,
-              ).length}/{party.guests.length})</span
-            >
+            {#if party.guests.some((guest) => guest.rsvp)}
+              <span
+                >({party.guests.filter(
+                  (guest) => guest.rsvp?.response === RSVP_Response.ACCEPTED,
+                ).length}/{party.guests.length})</span
+              >
+            {/if}
           </button>
         {:else}
           <p>Keine Parteien vorhanden.</p>

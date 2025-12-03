@@ -24,6 +24,6 @@
     color === 'pink' && 'border-pink-500 text-pink-500',
     size === 'small' && 'px-4 py-1',
     size === 'default' && 'px-4 py-2 text-xl',
-    'cursor-pointer rounded-lg border-2 transition-opacity hover:opacity-80',
+    'cursor-pointer rounded-lg border-2 leading-none transition-opacity hover:opacity-80',
   ]}>{@render children()}</button
 >

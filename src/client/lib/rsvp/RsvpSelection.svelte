@@ -3,8 +3,15 @@
   import { formatNames } from '../format';
   import { client } from '../guest_client';
   import Squiggle from '../Squiggle.svelte';
+  import Button from './Button.svelte';
 
-  let { party = $bindable() }: { party: Party } = $props();
+  let {
+    party = $bindable(),
+    openDetails,
+  }: {
+    party: Party;
+    openDetails: () => void;
+  } = $props();
 
   async function updateRsvpResponse(response: RSVP_Response) {
     const updateResponse = await client.updatePartyRsvpResponse({
@@ -32,7 +39,9 @@
   }
 </script>
 
-<div class="flex h-screen w-screen items-center justify-center">
+<div
+  class="flex h-screen w-screen flex-col items-center gap-8 overflow-y-auto py-4 lg:justify-center"
+>
   <div class="flex flex-col items-center justify-center gap-12">
     <div
       class="font-fontoon flex flex-col items-center gap-4 text-5xl text-orange-500"
@@ -63,6 +72,11 @@
     >
       <p>22.05.2026</p>
       <p>foodlab</p>
+    </div>
+  </div>
+  <div class="lg:absolute lg:inset-x-0 lg:bottom-4">
+    <div class="flex justify-center gap-2">
+      <Button onclick={() => openDetails()}>Weitere Informationen</Button>
     </div>
   </div>
 </div>

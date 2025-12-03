@@ -72,14 +72,19 @@ func (RSVP_Response) EnumDescriptor() ([]byte, []int) {
 }
 
 type RSVP struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Response            RSVP_Response          `protobuf:"varint,3,opt,name=response,proto3,enum=guest.v1.RSVP_Response" json:"response,omitempty"`
-	DietaryRestrictions string                 `protobuf:"bytes,4,opt,name=dietary_restrictions,json=dietaryRestrictions,proto3" json:"dietary_restrictions,omitempty"`
-	MusicWishes         string                 `protobuf:"bytes,5,opt,name=music_wishes,json=musicWishes,proto3" json:"music_wishes,omitempty"`
-	Note                string                 `protobuf:"bytes,6,opt,name=note,proto3" json:"note,omitempty"`
-	UpdatedAt           *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Response for the RSVP.
+	Response RSVP_Response `protobuf:"varint,3,opt,name=response,proto3,enum=guest.v1.RSVP_Response" json:"response,omitempty"`
+	// Dietary restrictions for this RSVP.
+	DietaryRestrictions string `protobuf:"bytes,4,opt,name=dietary_restrictions,json=dietaryRestrictions,proto3" json:"dietary_restrictions,omitempty"`
+	// Music wishes for this RSVP.
+	MusicWishes string `protobuf:"bytes,5,opt,name=music_wishes,json=musicWishes,proto3" json:"music_wishes,omitempty"`
+	// Additional note for this RSVP.
+	Note string `protobuf:"bytes,6,opt,name=note,proto3" json:"note,omitempty"`
+	// Timestamp of the last update to this RSVP.
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RSVP) Reset() {
@@ -148,10 +153,13 @@ func (x *RSVP) GetUpdatedAt() *timestamppb.Timestamp {
 }
 
 type Guest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	FirstName     string                 `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName      string                 `protobuf:"bytes,3,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	Rsvp          *RSVP                  `protobuf:"bytes,4,opt,name=rsvp,proto3" json:"rsvp,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// First name of the guest.
+	FirstName string `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	// Last name of the guest.
+	LastName string `protobuf:"bytes,3,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	// RSVP information for this guest.
+	Rsvp          *RSVP `protobuf:"bytes,4,opt,name=rsvp,proto3" json:"rsvp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -210,15 +218,24 @@ func (x *Guest) GetRsvp() *RSVP {
 // Party of guests that are invited to the wedding. Contact information is
 // always managed at the Party rather than the guest level.
 type Party struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Name                  string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	DisplayName           string                 `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Guests                []*Guest               `protobuf:"bytes,3,rep,name=guests,proto3" json:"guests,omitempty"`
-	AllowGuestSelfService bool                   `protobuf:"varint,8,opt,name=allow_guest_self_service,json=allowGuestSelfService,proto3" json:"allow_guest_self_service,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique name for the party. This is not human-readable.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Display name for the party.
+	DisplayName string `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	// Guests in this party.
+	Guests []*Guest `protobuf:"bytes,3,rep,name=guests,proto3" json:"guests,omitempty"`
+	// Whether this party is allowed to add/remove guests.
+	AllowGuestSelfService bool `protobuf:"varint,8,opt,name=allow_guest_self_service,json=allowGuestSelfService,proto3" json:"allow_guest_self_service,omitempty"`
 	// Maximum number of guests in this party.
-	MaxGuests     int32                  `protobuf:"varint,4,opt,name=max_guests,json=maxGuests,proto3" json:"max_guests,omitempty"`
-	Address       *Party_Address         `protobuf:"bytes,5,opt,name=address,proto3" json:"address,omitempty"`
-	Contact       *Party_Contact         `protobuf:"bytes,6,opt,name=contact,proto3" json:"contact,omitempty"`
+	MaxGuests int32 `protobuf:"varint,4,opt,name=max_guests,json=maxGuests,proto3" json:"max_guests,omitempty"`
+	// Mailing address for this party.
+	Address *Party_Address `protobuf:"bytes,5,opt,name=address,proto3" json:"address,omitempty"`
+	// Contact information for this party.
+	Contact *Party_Contact `protobuf:"bytes,6,opt,name=contact,proto3" json:"contact,omitempty"`
+	// Whether this party is in the inner circle.
+	InnerCircle bool `protobuf:"varint,9,opt,name=inner_circle,json=innerCircle,proto3" json:"inner_circle,omitempty"`
+	// Timestamp of the last update to this party.
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -301,6 +318,13 @@ func (x *Party) GetContact() *Party_Contact {
 		return x.Contact
 	}
 	return nil
+}
+
+func (x *Party) GetInnerCircle() bool {
+	if x != nil {
+		return x.InnerCircle
+	}
+	return false
 }
 
 func (x *Party) GetUpdatedAt() *timestamppb.Timestamp {
@@ -442,7 +466,7 @@ const file_guest_v1_guest_proto_rawDesc = "" +
 	"\n" +
 	"first_name\x18\x02 \x01(\tR\tfirstName\x12\x1b\n" +
 	"\tlast_name\x18\x03 \x01(\tR\blastName\x12\"\n" +
-	"\x04rsvp\x18\x04 \x01(\v2\x0e.guest.v1.RSVPR\x04rsvp\"\xef\x03\n" +
+	"\x04rsvp\x18\x04 \x01(\v2\x0e.guest.v1.RSVPR\x04rsvp\"\x92\x04\n" +
 	"\x05Party\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
 	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12'\n" +
@@ -451,7 +475,8 @@ const file_guest_v1_guest_proto_rawDesc = "" +
 	"\n" +
 	"max_guests\x18\x04 \x01(\x05R\tmaxGuests\x121\n" +
 	"\aaddress\x18\x05 \x01(\v2\x17.guest.v1.Party.AddressR\aaddress\x121\n" +
-	"\acontact\x18\x06 \x01(\v2\x17.guest.v1.Party.ContactR\acontact\x129\n" +
+	"\acontact\x18\x06 \x01(\v2\x17.guest.v1.Party.ContactR\acontact\x12!\n" +
+	"\finner_circle\x18\t \x01(\bR\vinnerCircle\x129\n" +
 	"\n" +
 	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1aV\n" +
 	"\aAddress\x12\x16\n" +

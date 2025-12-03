@@ -113,6 +113,18 @@
       bind:checked={party.allowGuestSelfService}
     />
   </div>
+  <div class="flex items-center gap-2">
+    <label
+      for="plus-one-self-service"
+      class="block text-sm font-medium text-gray-900">Standesamt:</label
+    >
+    <input
+      id="plus-one-self-service"
+      type="checkbox"
+      class="cursor-pointer"
+      bind:checked={party.innerCircle}
+    />
+  </div>
   <div class="mt-2 mb-2">
     <button
       type="button"

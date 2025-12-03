@@ -1,7 +1,6 @@
 <script lang="ts">
   import { type Party, RSVP_Response } from '../../../../gen/guest/v1/guest_pb';
-  import { client } from '../guest_client';
-  import Button from './Button.svelte';
+  import Details from './Details.svelte';
   import RsvpNo from './RsvpNo.svelte';
   import RsvpSelection from './RsvpSelection.svelte';
   import RsvpYes from './RsvpYes.svelte';
@@ -38,23 +37,21 @@
 </script>
 
 {#if rsvp === RSVP_Response.UNSPECIFIED}
-  <RsvpSelection bind:party />
+  <RsvpSelection bind:party {openDetails} />
 {:else if rsvp === RSVP_Response.DECLINED}
-  <RsvpNo bind:party />
+  <RsvpNo bind:party {openDetails} />
 {:else}
-  <RsvpYes bind:party />
+  <RsvpYes bind:party {openDetails} />
 {/if}
 
 <dialog
   id="wedding-detail-dialog"
-  class="bg-beige-500 m-auto w-2/3 rounded-lg border-2 border-blue-500 p-4"
+  class="bg-beige-500 m-auto h-full w-full overflow-hidden rounded-lg border-2 border-blue-500 lg:h-6/12 lg:w-2/3"
 >
-  <header class="flex items-center justify-between">
-    <h2 class="font-fontoon text-2xl text-blue-500">Details zur Hochzeit</h2>
-    <Button onclick={() => closeDetails()}>Schließen</Button>
-  </header>
+  <div class="flex h-full flex-col">
+    <Details
+      onclose={() => closeDetails()}
+      showInnerCircle={party.innerCircle}
+    />
+  </div>
 </dialog>
-
-<div class="absolute right-4 bottom-4">
-  <Button onclick={() => openDetails()}>Details zur Hochzeit</Button>
-</div>

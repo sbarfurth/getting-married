@@ -12,34 +12,47 @@ message RSVP {
     RESPONSE_ACCEPTED = 1;
     RESPONSE_DECLINED = 2;
   }
+
+  // Response for the RSVP.
   Response response = 3;
 
+  // Dietary restrictions for this RSVP.
   string dietary_restrictions = 4;
 
+  // Music wishes for this RSVP.
   string music_wishes = 5;
 
+  // Additional note for this RSVP.
   string note = 6;
 
+  // Timestamp of the last update to this RSVP.
   google.protobuf.Timestamp updated_at = 7;
 }
 
 message Guest {
+  // First name of the guest.
   string first_name = 2;
 
+  // Last name of the guest.
   string last_name = 3;
 
+  // RSVP information for this guest.
   RSVP rsvp = 4;
 }
 
 // Party of guests that are invited to the wedding. Contact information is
 // always managed at the Party rather than the guest level.
 message Party {
+  // Unique name for the party. This is not human-readable.
   string name = 1;
 
+  // Display name for the party.
   string display_name = 2;
 
+  // Guests in this party.
   repeated Guest guests = 3;
 
+  // Whether this party is allowed to add/remove guests.
   bool allow_guest_self_service = 8;
 
   // Maximum number of guests in this party.
@@ -50,13 +63,21 @@ message Party {
     string postal_code = 2;
     string city = 3;
   }
+
+  // Mailing address for this party.
   Address address = 5;
 
   message Contact {
     string email = 1;
     string phone = 2;
   }
+
+  // Contact information for this party.
   Contact contact = 6;
 
+  // Whether this party is in the inner circle.
+  bool inner_circle = 9;
+
+  // Timestamp of the last update to this party.
   google.protobuf.Timestamp updated_at = 7;
 }
