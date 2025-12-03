@@ -163,7 +163,9 @@
             ]}
             onclick={() => togglePartySelected(party)}
           >
-            <span>{party.displayName}</span>
+            <span>
+              {party.displayName}{#if party.innerCircle}*{/if}
+            </span>
             {#if party.guests.some((guest) => guest.rsvp)}
               <span
                 >({party.guests.filter(
