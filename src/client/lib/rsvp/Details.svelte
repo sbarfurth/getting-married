@@ -269,17 +269,17 @@
       <p>
         Wir haben uns 2016 während des Abiturs in Stade am Athenaeum
         kennengelernt. Wir sind also quasi so eine "Schulromanze" wie aus
-        billigen Liebesfilmen - aber halt in echt. Nach dem Abitur ging
+        kitschigen Liebesfilmen - aber halt in echt. Nach dem Abitur ging
         Sebastian für sein Studium nach Stuttgart und Sarah machte ein Jahr als
         Au-Pair in London. Ein Jahr Fernbeziehung haben wir aber auch
-        überstanden. Danach kam Sarah auch nach Stuttgart zum Studieren. Seitdem
-        wohnen wir gemeinsam - zunächst in Stuttgart (und Umgebung), und seit
-        2022 in München.
+        überstanden. Danach kam Sarah ebenfalls nach Stuttgart zum Studieren.
+        Seitdem wohnen wir gemeinsam - zunächst in Stuttgart (und Umgebung), und
+        seit 2022 in München.
       </p>
       <p>
         Nach fast genau 10 Jahren wollen wir jetzt dann (endlich) heiraten.
         Damit die passende Stimmung aufkommt, hier noch ein paar Eindrücke aus
-        den Jahren die hierher geführt haben.
+        unseren gemeinsamen Jahren, die hierher geführt haben.
       </p>
       <p>
         Wir freuen uns auf euch,<br />
