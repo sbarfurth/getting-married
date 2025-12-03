@@ -3,11 +3,12 @@
   import Party from './lib/Party.svelte';
   import type { Party as PartyPb } from '../../gen/guest/v1/guest_pb';
   import Rsvp from './lib/rsvp/Rsvp.svelte';
+  import { parseFeatureBoolean } from './lib/feature';
 
   const urlSearchParams = new URLSearchParams(window.location.search);
   const partyName = urlSearchParams.get('p') ?? '';
 
-  const isRsvp = window.location.pathname === '/rsvp';
+  const enableRsvp = parseFeatureBoolean(import.meta.env.VITE_ENABLE_RSVP);
 
   let party: PartyPb | undefined;
   let partyErr: string | undefined;
@@ -33,7 +34,7 @@
 
 {#if partyName}
   {#if party}
-    {#if isRsvp}
+    {#if enableRsvp}
       <Rsvp bind:party />
     {:else}
       <Party {party} />

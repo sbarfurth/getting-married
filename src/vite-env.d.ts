@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_CONFIRMATION_IMAGE_URL: string;
   readonly VITE_YEARS_IMAGES_BASE_URL: string;
   readonly VITE_YEARS_IMAGES_EXT: string;
+  readonly VITE_ENABLE_RSVP: string;
 }
 
 interface ImportMeta {
