@@ -145,7 +145,7 @@
 </button>
 
 <main class="grid h-full grid-cols-[300px_1fr]">
-  <aside class="border-r-2 border-orange-500">
+  <aside class="overflow-y-auto border-r-2 border-orange-500">
     {#if partyError}
       Fehler: {partyError}
     {/if}
@@ -167,11 +167,16 @@
               {party.displayName}{#if party.innerCircle}*{/if}
             </span>
             {#if party.guests.some((guest) => guest.rsvp)}
-              <span
-                >({party.guests.filter(
+              <span>
+                {party.guests.filter(
                   (guest) => guest.rsvp?.response === RSVP_Response.ACCEPTED,
-                ).length}/{party.guests.length})</span
-              >
+                ).length}/{party.guests.length}
+                {#if party.guests.length < party.maxGuests}
+                  (+{party.maxGuests - party.guests.length})
+                {/if}
+              </span>
+            {:else}
+              <span>k.A.</span>
             {/if}
           </button>
         {:else}

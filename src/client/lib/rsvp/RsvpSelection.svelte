@@ -54,7 +54,9 @@
         <div
           class="font-fontoon flex h-full flex-col items-center justify-center gap-4 p-4"
         >
-          <h2 class="text-2xl text-pink-500">Moin {formatNames(party)}!</h2>
+          <h2 class="text-center text-2xl text-pink-500">
+            Moin {formatNames(party)}!
+          </h2>
           <div class="flex gap-4">
             {#each makeOptions(party) as option}
               <button

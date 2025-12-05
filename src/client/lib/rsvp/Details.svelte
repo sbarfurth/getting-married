@@ -1,8 +1,7 @@
 <script lang="ts">
-  let {
-    showInnerCircle,
-    onclose,
-  }: { showInnerCircle: boolean; onclose: () => void } = $props();
+  import type { Party } from 'gen/guest/v1/guest_pb';
+
+  let { party, onclose }: { party: Party; onclose: () => void } = $props();
 
   let activeTab = $state<'party' | 'innerCircle' | 'about'>('party');
 
@@ -21,13 +20,13 @@
 
   const tabs: { [key in typeof activeTab]: string } = $derived({
     party: 'Hochzeits&shy;feier',
-    innerCircle: showInnerCircle ? 'Standes&shy;amt' : '',
+    innerCircle: party.innerCircle ? 'Standes&shy;amt' : '',
     about: 'Über uns',
   });
 
   function setActiveTab(tab: string) {
     if (tab === 'party' || tab === 'innerCircle' || tab === 'about') {
-      if (tab === 'innerCircle' && !showInnerCircle) {
+      if (tab === 'innerCircle' && !party.innerCircle) {
         return;
       }
       activeTab = tab;
@@ -196,6 +195,20 @@
             <p>IBAN: DE50 5001 0517 5429 5063 95</p>
           </div>
         </div>
+        {#if party.allowGuestSelfService}
+          <div>
+            <h3 class="text-xl font-bold text-pink-500">+1s / Begleitungen</h3>
+            <p>
+              Falls ihr ein +1 anmelden wollt, könnt ihr das ganz einfach selbst
+              machen. Nachdem ihr zugesagt habt, dass ihr kommt, könnt ihr die
+              Begleitung jederzeit eintragen und ändern.
+            </p>
+            <p>
+              Es ist wichtig, dass alle Begleitungen angemeldet sind, sodass wir
+              alles für die richtige Personenzahl vorbereiten können.
+            </p>
+          </div>
+        {/if}
         <div>
           <h3 class="text-xl font-bold text-pink-500">Dresscode</h3>
           <p class="italic">Summery Cocktail Attire</p>

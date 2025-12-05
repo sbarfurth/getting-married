@@ -49,9 +49,6 @@
   class="bg-beige-500 m-auto h-full w-full overflow-hidden rounded-lg border-2 border-blue-500 lg:min-h-6/12 lg:w-2/3"
 >
   <div class="flex h-full flex-col">
-    <Details
-      onclose={() => closeDetails()}
-      showInnerCircle={party.innerCircle}
-    />
+    <Details onclose={() => closeDetails()} {party} />
   </div>
 </dialog>
