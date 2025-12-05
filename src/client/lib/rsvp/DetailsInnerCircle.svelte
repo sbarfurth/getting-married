@@ -1,7 +1,3 @@
-<script lang="ts">
-  let showHotels = $state(false);
-</script>
-
 <div class="mt-4 grid grid-cols-3 gap-4 font-normal text-blue-500">
   <div class="flex flex-col gap-4">
     <div>

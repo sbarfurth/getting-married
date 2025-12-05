@@ -276,7 +276,7 @@
       </div>
     </div>
   {:else if activeTab === 'about'}
-    <div class="flex flex-col gap-4 text-blue-500">
+    <div class="flex flex-col gap-4 font-normal text-blue-500">
       <h3 class="text-xl font-bold text-pink-500">10 Jahre später...</h3>
       <p>Obwohl ihr uns ja alle kennt hier nochmal ein Mini-Rückblick:</p>
       <p>
