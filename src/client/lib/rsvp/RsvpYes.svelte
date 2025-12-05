@@ -97,9 +97,9 @@
   }
 </script>
 
-<div class="max-h-screen overflow-y-auto">
+<div class="max-h-svh overflow-y-auto">
   <div
-    class="font-fontoon flex w-screen justify-center py-8 lg:h-screen lg:items-center"
+    class="font-fontoon flex w-screen justify-center py-8 lg:h-svh lg:items-center"
   >
     <div class="flex flex-col gap-8">
       <div class="flex flex-col items-center gap-4">

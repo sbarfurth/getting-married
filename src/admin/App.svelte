@@ -31,7 +31,7 @@
   }
 </script>
 
-<div class="flex h-screen flex-col">
+<div class="flex h-svh flex-col">
   <header
     class="flex items-center justify-between bg-orange-500 px-4 py-2 text-white"
   >

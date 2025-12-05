@@ -40,7 +40,7 @@
 </script>
 
 <div
-  class="flex h-screen w-screen flex-col items-center gap-8 overflow-y-auto py-4 lg:justify-center"
+  class="flex h-svh w-screen flex-col items-center gap-8 overflow-y-auto py-4 lg:justify-center"
 >
   <div class="flex flex-col items-center justify-center gap-12">
     <div

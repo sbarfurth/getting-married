@@ -24,7 +24,7 @@
 </script>
 
 <div
-  class="font-fontoon flex h-screen w-screen flex-col items-center justify-center gap-4 p-2"
+  class="font-fontoon flex h-svh w-screen flex-col items-center justify-center gap-4 p-2"
 >
   <h1
     class="text-center text-3xl leading-relaxed text-pink-500 lg:max-w-1/3 lg:text-5xl"
