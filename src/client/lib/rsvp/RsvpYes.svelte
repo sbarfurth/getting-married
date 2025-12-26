@@ -140,7 +140,7 @@
                   ]}>Kommt nicht</button
                 >
               </div>
-              {#if guest.rsvp}
+              {#if guest.rsvp && false}
                 <RsvpDetails
                   dietaryRestrictions={guest.rsvp.dietaryRestrictions}
                   musicWishes={guest.rsvp.musicWishes}
