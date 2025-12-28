@@ -72,7 +72,8 @@
     lastName = '';
   }
 
-  async function addGuest() {
+  async function addGuest(e: Event) {
+    e.preventDefault();
     const updateResponse = await client.addGuest({
       name: party.name,
       guest: create(GuestSchema, {
@@ -174,7 +175,7 @@
       {#if canAddGuestsCount > 0}
         <form
           class="flex flex-col items-center gap-2 text-pink-500"
-          onsubmit={() => addGuest()}
+          onsubmit={addGuest}
         >
           {#if party.guests.length > 1}Ihr könnt{:else}Du kannst{/if} noch {canAddGuestsCount}
           weitere
