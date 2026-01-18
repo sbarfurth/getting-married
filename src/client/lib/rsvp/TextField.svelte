@@ -1,14 +1,18 @@
 <script lang="ts">
+  import type { FormEventHandler } from 'svelte/elements';
+
   let {
     label,
     placeholder,
     value = $bindable(),
     onblur,
+    oninput,
   }: {
     label?: string;
     placeholder?: string;
     value?: string;
     onblur?: (event: FocusEvent) => void;
+    oninput?: FormEventHandler<HTMLTextAreaElement>;
   } = $props();
   const uid = $props.id();
 </script>
@@ -25,5 +29,6 @@
     {placeholder}
     bind:value
     {onblur}
+    {oninput}
   ></textarea>
 </div>

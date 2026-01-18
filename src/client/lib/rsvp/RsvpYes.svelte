@@ -9,8 +9,8 @@
   } from '../../../../gen/guest/v1/guest_pb';
   import { client } from '../guest_client';
   import Button from './Button.svelte';
-  import TextField from './TextField.svelte';
   import RsvpDetails from './RsvpDetails.svelte';
+  import { timestampDate } from '@bufbuild/protobuf/wkt';
 
   let {
     party = $bindable(),
@@ -126,7 +126,7 @@
                   onclick={() =>
                     updateGuestRsvpResponse(index, RSVP_Response.ACCEPTED)}
                   class={[
-                    'flex-1 cursor-pointer rounded-l-lg border-2 border-r border-blue-500 p-2 text-blue-500 transition-colors hover:bg-blue-500/10',
+                    'flex-1 cursor-pointer rounded-l-lg border-2 border-r border-blue-500 p-2 whitespace-nowrap text-blue-500 transition-colors hover:bg-blue-500/10',
                     guest.rsvp?.response === RSVP_Response.ACCEPTED &&
                       'bg-blue-500 text-white hover:bg-blue-500/90',
                   ]}>Kommt</button
@@ -135,18 +135,19 @@
                   onclick={() =>
                     updateGuestRsvpResponse(index, RSVP_Response.DECLINED)}
                   class={[
-                    'flex-1 cursor-pointer rounded-r-lg border-2 border-l border-blue-500 p-2 text-blue-500 transition-colors hover:bg-blue-500/10',
+                    'flex-1 cursor-pointer rounded-r-lg border-2 border-l border-blue-500 p-2 whitespace-nowrap text-blue-500 transition-colors hover:bg-blue-500/10',
                     guest.rsvp?.response === RSVP_Response.DECLINED &&
                       'bg-blue-500 text-white hover:bg-blue-500/90',
                   ]}>Kommt nicht</button
                 >
               </div>
-              {#if guest.rsvp && false}
+              {#if guest.rsvp}
                 <RsvpDetails
                   dietaryRestrictions={guest.rsvp.dietaryRestrictions}
                   musicWishes={guest.rsvp.musicWishes}
                   note={guest.rsvp.note}
-                  update={() => updateGuestRsvp(index)}
+                  update={(updater: (rsvp: RSVP) => void) =>
+                    updateGuestRsvp(index, updater)}
                 />
               {/if}
               {#if party.allowGuestSelfService && index !== 0}
@@ -162,6 +163,16 @@
         <div class="flex flex-col gap-2">
           <p class="text-xs text-blue-500">
             Alle Änderungen werden automatisch gespeichert.
+            {#if party.updatedAt}
+              Zuletzt aktualisiert:
+              {timestampDate(party.updatedAt).toLocaleDateString('de-DE', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}.
+            {/if}
           </p>
           <button
             class="cursor-pointer text-xs text-pink-500 underline"

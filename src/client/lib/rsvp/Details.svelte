@@ -179,18 +179,19 @@
         <div>
           <h3 class="text-xl font-bold text-pink-500">Geschenke</h3>
           <p>
-            Wir würden uns sehr darüber freuen, wenn ihr einen Teil zu unseren
-            Flitterwochen beitragen würdet.
+            Wir machen unsere Hochzeitsreise nach <strong>New York</strong>!
           </p>
-          <p>Wir planen eine Reise nach <strong>New York</strong>!</p>
-          <p>
-            Wenn ihr mögt (auch wenn es nicht so charmant ist), wäre es am
-            besten, wenn ihr das Geld direkt über PayPal oder per Überweisung
-            schickt.
+          <p class="mt-2">
+            Über jeden Beitrag dazu würden wir uns sehr freuen. Auch wenn es
+            nicht so charmant ist, wäre es am besten wenn ihr euer Geschenk
+            direkt per PayPal oder Überweisung "übergebt". Das klassische
+            Bargeld ist etwas unpraktisch für uns.
           </p>
           <div class="mt-2">
-            <a href="https://paypal.com" target="_blank" class="underline"
-              >Zu PayPal (Link folgt!)</a
+            <a
+              href="https://www.paypal.com/pool/9lSC4mOHVb?sr=wccr"
+              target="_blank"
+              class="underline">Zu PayPal</a
             >
             <p>IBAN: DE50 5001 0517 5429 5063 95</p>
           </div>
