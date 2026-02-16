@@ -219,7 +219,7 @@
           </p>
           <p>
             <strong>Kleider:</strong> Festlich, in Midi-Länge und gerne in sommerlichen
-            Farben (auch mit Prints).
+            Farben und/oder Prints (auch gerne Hosenanzüge falls ihr das bevorzugt)
           </p>
           <p>
             <strong>Anzüge:</strong> Klassisch, dunkel und mit Krawatte oder Fliege.
