@@ -214,9 +214,16 @@
           <h3 class="text-xl font-bold text-pink-500">Dresscode</h3>
           <p class="italic">Summery Cocktail Attire</p>
           <p>
-            Darunter verstehen wir: Anzug mit Krawatte oder Kleider mit
-            Midi-Länge in sommerlichen Farben / Prints. Lasst euch doch von den
-            Farben der Einladung inspirieren!
+            Lasst euch von den Farben der Einladung inspirieren! Darunter
+            verstehen wir...
+          </p>
+          <p>
+            <strong>Kleider:</strong> Festlich, in Midi-Länge und gerne in sommerlichen
+            Farben (auch mit Prints).
+          </p>
+          <p>
+            <strong>Anzüge:</strong> Klassisch, dunkel und mit Krawatte oder Fliege.
+            Die sommerlichen Akzente setzt ihr hier am besten über eure Accessoires.
           </p>
         </div>
         <div>
