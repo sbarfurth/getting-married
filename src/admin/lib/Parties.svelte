@@ -12,20 +12,7 @@
 
   async function getParties(): Promise<readonly Party[]> {
     const response = await client.listParties({});
-    return [
-      ...response.parties,
-      ...response.parties,
-      ...response.parties,
-      ...response.parties,
-      ...response.parties,
-      ...response.parties,
-      ...response.parties,
-      ...response.parties,
-      ...response.parties,
-      ...response.parties,
-      ...response.parties,
-      ...response.parties,
-    ];
+    return response.parties;
   }
 
   let parties = $state(getParties());
