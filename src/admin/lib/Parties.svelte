@@ -12,7 +12,20 @@
 
   async function getParties(): Promise<readonly Party[]> {
     const response = await client.listParties({});
-    return response.parties;
+    return [
+      ...response.parties,
+      ...response.parties,
+      ...response.parties,
+      ...response.parties,
+      ...response.parties,
+      ...response.parties,
+      ...response.parties,
+      ...response.parties,
+      ...response.parties,
+      ...response.parties,
+      ...response.parties,
+      ...response.parties,
+    ];
   }
 
   let parties = $state(getParties());
@@ -113,6 +126,22 @@
     });
     parties = getParties();
   }
+
+  function formatResponses(parties: readonly Party[]): string {
+    let yes = 0;
+    let total = 0;
+    let unused = 0;
+    for (const party of parties) {
+      for (const guest of party.guests) {
+        total += 1;
+        if (guest.rsvp?.response === RSVP_Response.ACCEPTED) {
+          yes++;
+        }
+      }
+      unused += party.maxGuests - party.guests.length;
+    }
+    return `${yes}/${total} (+${unused})`;
+  }
 </script>
 
 <dialog
@@ -145,7 +174,7 @@
 </button>
 
 <main class="grid h-full grid-cols-[300px_1fr]">
-  <aside class="overflow-y-auto border-r-2 border-orange-500">
+  <aside class="flex h-full min-h-0 flex-col border-r-2 border-orange-500">
     {#if partyError}
       Fehler: {partyError}
     {/if}
@@ -153,7 +182,7 @@
     {#await parties}
       Parteien werden geladen...
     {:then parties}
-      <div class="flex flex-col gap-2 p-2">
+      <div class="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto p-2">
         {#each parties as party}
           <button
             type="button"
@@ -182,6 +211,9 @@
         {:else}
           <p>Keine Parteien vorhanden.</p>
         {/each}
+      </div>
+      <div class="border-t border-orange-500 p-2 text-center">
+        {formatResponses(parties)}
       </div>
     {:catch err}
       Parteien konnten nicht geladen werden: {err.message}
