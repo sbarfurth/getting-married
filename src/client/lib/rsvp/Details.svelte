@@ -222,8 +222,8 @@
             Farben und/oder Prints (auch gerne Hosenanzüge falls ihr das bevorzugt)
           </p>
           <p>
-            <strong>Anzüge:</strong> Klassisch, dunkel und mit Krawatte oder Fliege.
-            Die sommerlichen Akzente setzt ihr hier am besten über eure Accessoires.
+            <strong>Anzüge:</strong> Klassisch, mit Krawatte oder Fliege. Die sommerlichen
+            Akzente könnt ihr hier über eure Accessoires setzen.
           </p>
         </div>
         <div>
