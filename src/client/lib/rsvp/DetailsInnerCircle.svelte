@@ -25,8 +25,17 @@
     <div>
       <h3 class="text-xl font-bold text-pink-500">Ablauf</h3>
       <p>Die Trauung dauert ca. 20 Minuten.</p>
-      <p>Anschließend gehen wir als Gruppe gemeinsam zum Mittagessen.</p>
-      <p class="text-sm italic">Das Restaurant steht noch nicht fest.</p>
+      <p>Anschließend gehen wir als Gruppe gemeinsam zum Mittagessen bei:</p>
+      <address class="not-italic">
+        <a
+          href="https://maps.app.goo.gl/WPAtkWxUjB8qgVW97"
+          target="_blank"
+          class="underline"
+          ><h4 class="font-bold">Hobenköök Restaurant</h4></a
+        >
+        Stockmeyerstraße 43<br />
+        20457 Hamburg
+      </address>
     </div>
   </div>
 </div>
