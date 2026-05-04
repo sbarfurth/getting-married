@@ -193,6 +193,7 @@
               target="_blank"
               class="underline">Zu PayPal</a
             >
+            <p>Name: Sebastian Barfurth / Sarah Woitera</p>
             <p>IBAN: DE50 5001 0517 5429 5063 95</p>
           </div>
         </div>
