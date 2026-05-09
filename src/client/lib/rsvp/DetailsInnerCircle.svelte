@@ -25,7 +25,7 @@
     <div>
       <h3 class="text-xl font-bold text-pink-500">Ablauf</h3>
       <p>Die Trauung dauert ca. 20 Minuten.</p>
-      <p>Anschließend gehen wir als Gruppe gemeinsam zum Mittagessen bei:</p>
+      <p>Danach gehen/fahren wir als Gruppe gemeinsam zum Mittagessen bei:</p>
       <address class="not-italic">
         <a
           href="https://maps.app.goo.gl/WPAtkWxUjB8qgVW97"

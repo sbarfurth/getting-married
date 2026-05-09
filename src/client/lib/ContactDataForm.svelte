@@ -7,11 +7,11 @@
 
   let { party, close }: { party: Party; close: () => void } = $props();
 
-  let street = $state(party.address?.street ?? '');
-  let postalCode = $state(party.address?.postalCode ?? '');
-  let city = $state(party.address?.city ?? '');
-  let email = $state(party.contact?.email ?? '');
-  let phone = $state(party.contact?.phone ?? '');
+  let street = $derived(party.address?.street ?? '');
+  let postalCode = $derived(party.address?.postalCode ?? '');
+  let city = $derived(party.address?.city ?? '');
+  let email = $derived(party.contact?.email ?? '');
+  let phone = $derived(party.contact?.phone ?? '');
 
   let sending = $state(false);
   let closing = $state(false);
