@@ -164,14 +164,13 @@
               <p>Empfang 🥂</p>
             </li>
             <li>
-              <strong>18:30 Uhr</strong>
+              <strong>18:15 Uhr</strong>
               <p>Essen 🍜</p>
             </li>
             <li>
-              <strong>20:30 Uhr</strong>
+              <strong>21:30 Uhr</strong>
               <p>Party 🎉</p>
             </li>
-            <span class="text-sm">Der Ablauf ist noch nicht final.</span>
           </ul>
         </div>
       </div>
